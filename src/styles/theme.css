@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --font-raleway: var(--font-raleway), sans-serif;
+  --font-open-sans: var(--font-open-sans), sans-serif;
+
+  --color-blue-primary: #0A2752;
+  --color-blue-secondary: #52BCC3;
+
+  --breakpoint-sm: 640.1px;
+  --breakpoint-md: 768.1px;
+  --breakpoint-lg: 1024.1px;
+  --breakpoint-xl: 1280.1px;
+  --breakpoint-xxl: 1536.1px;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@layer utilities {}
+@layer base {}
