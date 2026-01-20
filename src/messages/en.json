@@ -1,0 +1,32 @@
+{
+    "Landing": {
+        "nosc-is-title": "NOSC-UA DIH -",
+        "nosc-is-description": "is a virtual digital innovation hub that provides digital innovation services for researchers, the business sector, and public authorities using cloud technologies and other advanced digital technologies.",
+        "nosc-purpose-title": "The purpose of NOSC-UA DIH is to promote",
+        "nosc-purpose-description-1": "cooperation between research infrastructures and innovative companies (including SMEs) based on digital technologies",
+        "nosc-purpose-description-2": "the development of new products and services based on green and digital technologies, involving the innovation potential of scientific institutions of the National Academy of Sciences of Ukraine",
+        "nosc-purpose-description-3": "the integration of Ukrainian SMEs and researchers into the European Research Area and the EU Digital Single Market.",
+        "feature-1": "Joint development and piloting of digital innovation projects",
+        "feature-2": "Investment support and fundraising",
+        "feature-3": "Access to an innovation ecosystem and networking",
+        "feature-4": "Development of digital skills through education",
+        "feature-5": "Provision of digital services",
+        "more-services": "View more services",
+        "industries-title": "Areas of activity of the Digital Innovation Hub",
+        "industries-1": "Digitalisation of agriculture",
+        "industries-2": "Digitalisation of energy",
+        "industries-3": "Digital and green transition",
+        "industries-4": "Digital technologies centre for non-destructive testing",
+        "industries-5": "New materials",
+        "partners-description": "The infrastructure base for the Virtual Centre for Digital Science is the cloud cluster of the Ukrainian National Grid and the educational-research platform of the KAU Data Science Research Center. The implementation of the main project tasks focuses on the development of the UNG cloud grid infrastructure."
+    },
+
+    "Navbar": {
+        "main": "Home",
+        "about-us": "About Us",
+        "innovation-center": "Digital Innovation Centre",
+        "science-service": "Digital Science Services",
+        "fiware": "Fiware iHUB",
+        "news": "News"
+    }
+}

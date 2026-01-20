@@ -4,7 +4,9 @@ import '../styles/theme.css';
 
 
 import { AppProps } from 'next/app';
+import { IntlProvider } from 'next-intl';
 import { Raleway, Open_Sans } from 'next/font/google';
+import Footer from '@/components/Footer';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -16,9 +18,12 @@ const openSansMono = Open_Sans({
   variable: '--font-open-sans',
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
-    <>
+    <IntlProvider
+      locale={router.locale!}
+      messages={pageProps.messages}
+    >
       <style jsx global>
         {`
           :root {
@@ -30,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Navbar />
       <Component {...pageProps} />
-    </>
+      <Footer />
+    </IntlProvider>
   );
 }

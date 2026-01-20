@@ -11,7 +11,12 @@
 import { FC, useEffect, useRef, useState } from 'react';
 // import { useIntl } from 'react-intl';
 import { usePathname } from 'next/navigation';
+import { useRouter } from "next/router";
 import Image from 'next/image';
+import SearchInput from '../SearchInput';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import MenuIcon from '../icons/Menu';
 
 // const languages = [
 //   {
@@ -32,16 +37,41 @@ import Image from 'next/image';
 //   },
 // ];
 
+const routes = [
+  {
+    name: 'main',
+    link: '/landing'
+  },
+  {
+    name: 'about-us',
+  },
+  {
+    name: 'innovation-center',
+  },
+  {
+    name: 'science-service',
+  },
+  {
+    name: 'fiware',
+  },
+  {
+    name: 'news'
+  },
+];
+
 const Navbar: FC<NavbarProps> = () => {
   //   const { formatMessage } = useIntl();
   //   const changePage = useChangePage();
   //   const locationSearch = useLocationSearch();
   //   const currentScreenType = useScreenSizeType();
   //   const { isBiggerThanCurrentSizeType, sizeTypes } = screenSizes;
+  const { locale, asPath } = useRouter();
+  const t = useTranslations('Navbar');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isLanguageBarOpen, setIsLanguageBarOpen] = useState<boolean>(false);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState<number>(0);
   //   const sidebarRef = useOutsideClick(() => setIsSidebarOpen(false), [headerRef]);
   //   const languageRef = useOutsideClick(() => setIsLanguageBarOpen(false));
 
@@ -69,82 +99,94 @@ const Navbar: FC<NavbarProps> = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (headerRef.current?.offsetHeight) {
+      setHeaderHeight(headerRef.current?.offsetHeight);
+    }
+  }, [headerRef.current?.offsetHeight]);
+
   return (
     <>
       <header
-        className={`bg-white w-full z-50 transition-transform duration-300 ${
+        className={`fixed bg-white w-full z-50 transition-transform duration-300 ${
           showHeader || isSidebarOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
         ref={headerRef}
       >
-        <div className='mx-auto my-auto px-4 md:px-10 lg:px-16 z-200'>
-          <div className='flex items-center justify-between'>
+        <div className='w-full mx-auto my-auto px-4 md:px-10 lg:px-16 z-50 relative'>
+          <div className='flex items-center justify-between w-full'>
             {/* Logo */}
-            <div className='flex items-center gap-10'>
-              <img src='/header/nosc.png' alt='nosc' width={190} height={110} />
+            <div className='w-full flex items-center justify-between xl:justify-baseline gap-10'>
+              <div>
+                <MenuIcon className='size-8' />
+              </div>
+              
+              <img
+                src='/header/nosc.png'
+                alt='nosc'
+                className='w-[150px] h-[84px] lg:w-[170px] lg:h-[95px]'
+              />
 
-              <img src='/header/edih.png' alt='edih' width={160} height={70} />
+              <img
+                className='hidden xl:block'
+                src='/header/edih.png'
+                alt='edih'
+                width={140}
+                height={55}
+              />
 
-              <img src='/header/fiware.png' alt='fiware' width={260} height={50} />
+              <img
+                className='hidden xl:block'
+                src='/header/fiware.png'
+                alt='fiware'
+                width={230}
+                height={40}
+              />
+
+              <div />
             </div>
-
-            {/* Desktop Navigation */}
-            {/* <nav className='hidden xl:flex items-center space-x-14'>
-              {navigationItems.map(item => (
-                <div key={item.name} className='relative group'>
-                  {item.hasDropdown ? (
-                    <div className='relative'>
-                      <button
-                        onClick={() => item.route && changePage({ pathname: item.route })}
-                        className={`py-1 text-white group-hover:text-teal-300 transition-colors duration-200 flex items-center space-x-1 text-base ${
-                          item.route ? 'cursor-pointer' : ''
-                        } ${
-                          item.route === pathname ||
-                          item.subItems?.some(route => route.route === pathname)
-                            ? '!text-teal-300 !font-semibold'
-                            : ''
-                        }`}
-                      >
-                        <span className='uppercase'>{formatMessage({ id: item.name })}</span>
-                        <ChevronDown className='w-4 h-4' />
-                      </button>
-                      <div className={`absolute top-full left-0 mt-1 min-w-42 max-w-56 grid grid-cols-1 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 ${showHeader ? 'group-hover:visible' : 'group-hover:invisible'} transition-all duration-200 z-50`}>
-                        {item.subItems?.map(subItem => (
-                          <button
-                            onClick={() => changePage({ pathname: subItem.route })}
-                            key={subItem.name}
-                            className={`${
-                              subItem.route === pathname ? 'font-semibold' : ''
-                            } text-blue-primary cursor-pointer block w-full text-left px-4 py-2 bg-white border-x-2 border-blue-secondary hover:bg-blue-secondary hover:text-white transition-all duration-300 first:rounded-t-md first:border-t-2 last:rounded-b-md last:border-b-2`}
-                          >
-                            {formatMessage({ id: subItem.name })}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => changePage({ pathname: item.route! })}
-                      className={`${
-                        item.route === pathname ? '!text-teal-300 !font-semibold' : ''
-                      } cursor-pointer text-white uppercase hover:text-teal-300 transition-colors duration-200 flex items-center space-x-1 text-base`}
-                    >
-                      {formatMessage({ id: item.name })}
-                    </button>
-                  )}
-                </div>
-              ))}
-            </nav> */}
 
             {/* Desktop Right Side */}
-            <div className='flex items-center xl:space-x-12 text-2xl'>
+            <div className='hidden xl:flex items-center xl:space-x-12 text-xl'>
               <div className='flex items-center gap-1'>
-                <div className='font-bold'>UA</div>
+                <Link
+                  href={asPath}
+                  locale='uk'
+                  className={`${locale === 'uk' ? 'font-bold' : ''}`}
+                >
+                  UA
+                </Link>
                 <div>|</div>
-                <div>EN</div>
+                <Link
+                  href={asPath}
+                  locale='en'
+                  className={`${locale === 'en' ? 'font-bold' : ''}`}
+                >
+                  EN
+                </Link>
               </div>
+
+              <SearchInput />
             </div>
           </div>
+
+          <nav
+            className={`absolute w-full left-0 -bottom-12 px-20 transition-opacity hidden xl:flex items-center justify-between text-white text-xl ${
+              showHeader || isSidebarOpen ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {routes.map(item => (
+              <Link
+                aria-disabled={!!item.link}
+                className={`${
+                  !item.link ? 'pointer-events-none opacity-70' : ''
+                } hover:underline underline-offset-2`}
+                href={item.link || ''}
+              >
+                {t(item.name)}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Mobile Menu Overlay */}
@@ -222,10 +264,10 @@ const Navbar: FC<NavbarProps> = () => {
       </header>
 
       <div
-        className={`xl:hidden fixed top-0 left-0 w-full h-screen bg-black/40 z-40 transition-opacity duration-300 ${
-          isSidebarOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
-        onClick={() => setIsSidebarOpen(false)}
+        className='bg-transparent w-full'
+        style={{
+          height: headerHeight,
+        }}
       />
     </>
   );
