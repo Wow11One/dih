@@ -20,10 +20,7 @@ const openSansMono = Open_Sans({
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
-    <IntlProvider
-      locale={router.locale!}
-      messages={pageProps.messages}
-    >
+    <IntlProvider locale={router.locale!} messages={pageProps.messages}>
       <style jsx global>
         {`
           :root {
@@ -33,9 +30,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
         `}
       </style>
 
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
+      <div className='flex flex-col min-h-screen'>
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </div>
     </IntlProvider>
   );
 }

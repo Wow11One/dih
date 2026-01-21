@@ -11,12 +11,13 @@
 import { FC, useEffect, useRef, useState } from 'react';
 // import { useIntl } from 'react-intl';
 import { usePathname } from 'next/navigation';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import SearchInput from '../SearchInput';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import MenuIcon from '../icons/Menu';
+import { it } from 'node:test';
 
 // const languages = [
 //   {
@@ -40,10 +41,11 @@ import MenuIcon from '../icons/Menu';
 const routes = [
   {
     name: 'main',
-    link: '/landing'
+    link: '/',
   },
   {
     name: 'about-us',
+    link: '/about-us',
   },
   {
     name: 'innovation-center',
@@ -55,7 +57,8 @@ const routes = [
     name: 'fiware',
   },
   {
-    name: 'news'
+    name: 'news',
+    link: '/news',
   },
 ];
 
@@ -65,11 +68,13 @@ const Navbar: FC<NavbarProps> = () => {
   //   const locationSearch = useLocationSearch();
   //   const currentScreenType = useScreenSizeType();
   //   const { isBiggerThanCurrentSizeType, sizeTypes } = screenSizes;
-  const { locale, asPath } = useRouter();
+  const { locale, asPath, push } = useRouter();
   const t = useTranslations('Navbar');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isLanguageBarOpen, setIsLanguageBarOpen] = useState<boolean>(false);
-  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
+  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(
+    null,
+  );
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState<number>(0);
   //   const sidebarRef = useOutsideClick(() => setIsSidebarOpen(false), [headerRef]);
@@ -87,7 +92,10 @@ const Navbar: FC<NavbarProps> = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY.current && currentScrollY > window.innerHeight / 2.5) {
+      if (
+        currentScrollY > lastScrollY.current &&
+        currentScrollY > window.innerHeight / 2.5
+      ) {
         setShowHeader(false);
       } else {
         setShowHeader(true);
@@ -117,10 +125,13 @@ const Navbar: FC<NavbarProps> = () => {
           <div className='flex items-center justify-between w-full'>
             {/* Logo */}
             <div className='w-full flex items-center justify-between xl:justify-baseline gap-10'>
-              <div>
-                <MenuIcon className='size-8' />
+              <div className='xl:hidden'>
+                <MenuIcon
+                  onClick={() => setIsSidebarOpen((prev) => !prev)}
+                  className='size-8 cursor-pointer'
+                />
               </div>
-              
+
               <img
                 src='/header/nosc.png'
                 alt='nosc'
@@ -179,8 +190,8 @@ const Navbar: FC<NavbarProps> = () => {
               <Link
                 aria-disabled={!!item.link}
                 className={`${
-                  !item.link ? 'pointer-events-none opacity-70' : ''
-                } hover:underline underline-offset-2`}
+                  !item.link ? 'pointer-events-none opacity-40' : ''
+                } hover:underline underline-offset-2 ${['/news'].some((item) => pathname.startsWith(item)) ? 'text-black' : ''}`}
                 href={item.link || ''}
               >
                 {t(item.name)}
@@ -192,42 +203,48 @@ const Navbar: FC<NavbarProps> = () => {
         {/* Mobile Menu Overlay */}
         <>
           <div
-            className={`overflow-y-auto xl:hidden fixed z-50 left-0 top-15 h-screen w-[50%] bg-blue-primary transform transition-transform duration-300 ease-in-out ${
+            className={`overflow-y-auto xl:hidden fixed z-50 left-0 h-screen w-[50%] bg-white transform transition-transform duration-300 ease-in-out ${
               isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
+            style={{
+              top: headerHeight
+            }}
             // ref={sidebarRef}
           >
             <div className='flex flex-col h-full'>
               {/* Mobile Navigation */}
-              {/* <nav className='flex-1 px-4 py-6'>
+              <nav className='flex-1 px-4 py-6'>
                 <ul className='space-y-8'>
-                  {navigationItems.map(item => (
+                  {routes.map(item => (
                     <li key={item.name}>
-                      {item.hasDropdown ? (
+                      {false ? (
                         <div>
                           <button
                             onClick={() => toggleMobileSubmenu(item.name)}
-                            className={`text-white hover:text-teal-300 transition-colors duration-200 text-left text-xl font-semibold w-full flex items-center gap-1 ${
-                              item.route === pathname ||
-                              item.subItems?.some(route => route.route === pathname)
-                                ? '!text-teal-300'
+                            className={`text-white hover:text-blue-primary transition-colors duration-200 text-left text-xl font-semibold w-full flex items-center gap-1 ${
+                              pathname.startsWith(item.link || '')
+                                ? // || item.subItems?.some(route => route.route === pathname)
+                                  'bg-blue-primary'
                                 : ''
                             }`}
                           >
-                            <span>{formatMessage({ id: item.name })}</span>
-                            <ChevronRight
+                            <span>
+                              {/* {t({ id: item.name })} */}
+                              {t(item.name)}
+                            </span>
+                            {/* <ChevronRight
                               className={`w-5 h-5 transition-transform duration-200 ${
                                 expandedMobileMenu === item.name ? 'rotate-90' : ''
                               }`}
-                            />
+                            /> */}
                           </button>
-                          {expandedMobileMenu === item.name && (
+                          {/* {expandedMobileMenu === item.name && (
                             <ul className='mt-3 ml-4 space-y-4'>
                               {item.subItems?.map(subItem => (
                                 <li key={subItem.name}>
                                   <button
                                     onClick={() => {
-                                      changePage({ pathname: subItem.route! });
+                                      //changePage({ pathname: subItem.route! });
                                       setIsSidebarOpen(false);
                                     }}
                                     className={`cursor-pointer text-gray-300 hover:text-teal-300 transition-colors duration-200 text-left text-lg ${
@@ -239,25 +256,27 @@ const Navbar: FC<NavbarProps> = () => {
                                 </li>
                               ))}
                             </ul>
-                          )}
+                          )} */}
                         </div>
                       ) : (
                         <button
-                          className={`text-white hover:text-teal-300 transition-colors duration-200 text-left text-xl font-medium w-full ${
-                            item.route === pathname ? '!text-teal-300' : ''
+                          className={`cursor-pointer text-blue-primary transition-colors duration-200 text-left text-xl font-medium w-full disabled:opacity-50 ${
+                            pathname.startsWith(item.link || '') ? 'text-blue-primary' : ''
                           }`}
+                          disabled={!item.link}
                           onClick={() => {
-                            changePage({ pathname: item.route! });
+                            if (!item.link) return;
+                            push(item.link);
                             setIsSidebarOpen(false);
                           }}
                         >
-                          {formatMessage({ id: item.name })}
+                          {t(item.name)}
                         </button>
                       )}
                     </li>
                   ))}
                 </ul>
-              </nav> */}
+              </nav>
             </div>
           </div>
         </>

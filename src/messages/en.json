@@ -20,7 +20,6 @@
         "industries-5": "New materials",
         "partners-description": "The infrastructure base for the Virtual Centre for Digital Science is the cloud cluster of the Ukrainian National Grid and the educational-research platform of the KAU Data Science Research Center. The implementation of the main project tasks focuses on the development of the UNG cloud grid infrastructure."
     },
-
     "Navbar": {
         "main": "Home",
         "about-us": "About Us",
@@ -28,5 +27,19 @@
         "science-service": "Digital Science Services",
         "fiware": "Fiware iHUB",
         "news": "News"
+    },
+
+    "AboutUs": {
+        "paragraph-1": "Within the framework of the project of the Kyiv Academic University of the National Academy of Sciences of Ukraine and the Ministry of Education and Science of Ukraine (KAU) \"Development of the Virtual Centre of Digital Science\" under the targeted comprehensive programme of scientific research of the National Academy of Sciences of Ukraine \"Grid infrastructure and grid technologies for scientific and applied research\", during 2018–2019 a web catalogue of cloud services of the Virtual Centre of Digital Science (VCDS) was created on the basis of the cloud cluster of the Ukrainian National Grid.",
+        "paragraph-2": "The cloud cluster enables efficient use of computing resources by implementing the \"on-demand resource allocation\" model. Currently, the UA-BITP cloud site is the only cloud resource in Ukraine that meets all EGI requirements for availability and reliability and is included in the EGI Federated Cloud resources.",
+        "paragraph-3": "In 2020, the Bogolyubov Institute for Theoretical Physics of the National Academy of Sciences of Ukraine (ITP), which was authorised by the Government of Ukraine (letter of the Ministry of Education and Science of Ukraine No. 1/11-6930 dated 09.10.2020) to represent Ukraine in the EOSC Association, submitted an application for membership in the EOSC Association. On 21 October 2020, an ITP representative took part in the EOSC Symposium, where draft versions of key EOSC documents, including the EOSC Association Statutes, were presented.",
+        "paragraph-4": "On 17 December 2020, during the meeting of the General Assembly (EOSC General Assembly), the Bogolyubov Institute for Theoretical Physics of the National Academy of Sciences of Ukraine was recognised as a full member of the EOSC Association as the official representative of Ukraine. The EOSC Association unites 142 members, including 21 members with a national mandate (including Ukraine) and 49 members with observer status. The members of the EOSC Association include leading European research organisations, resource centres, and providers of grid and cloud services actively involved in the implementation of the European Open Science Cloud concept."
+    },
+
+    "News": {
+        "title": "News",
+        "category": "Category",
+        "leaveComment": "Leave a comment",
+        "authorizeToLeaveComment": "To post a comment, you need to be authorised."
     }
 }
