@@ -20,6 +20,7 @@
         "industries-5": "New materials",
         "partners-description": "The infrastructure base for the Virtual Centre for Digital Science is the cloud cluster of the Ukrainian National Grid and the educational-research platform of the KAU Data Science Research Center. The implementation of the main project tasks focuses on the development of the UNG cloud grid infrastructure."
     },
+
     "Navbar": {
         "main": "Home",
         "about-us": "About Us",
@@ -41,5 +42,13 @@
         "category": "Category",
         "leaveComment": "Leave a comment",
         "authorizeToLeaveComment": "To post a comment, you need to be authorised."
+    },
+
+    "InnovationCenter": {
+        "title": "Центр цифрових інновацій",
+        "menu-1": "Послуги",
+        "menu-2": "Партнери",
+        "menu-3": "Тренінги",
+        "menu-4": "Проєкти"
     }
 }

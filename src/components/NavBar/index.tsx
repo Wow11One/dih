@@ -49,6 +49,7 @@ const routes = [
   },
   {
     name: 'innovation-center',
+    link: '/innovation-center',
   },
   {
     name: 'science-service',
@@ -94,7 +95,7 @@ const Navbar: FC<NavbarProps> = () => {
 
       if (
         currentScrollY > lastScrollY.current &&
-        currentScrollY > window.innerHeight / 2.5
+        currentScrollY > headerHeight + 50
       ) {
         setShowHeader(false);
       } else {
@@ -191,7 +192,7 @@ const Navbar: FC<NavbarProps> = () => {
                 aria-disabled={!!item.link}
                 className={`${
                   !item.link ? 'pointer-events-none opacity-40' : ''
-                } hover:underline underline-offset-2 ${['/news'].some((item) => pathname.startsWith(item)) ? 'text-black' : ''}`}
+                } hover:underline underline-offset-2 ${['/news', '/innovation-center'].some((item) => pathname.startsWith(item)) ? 'text-black' : ''}`}
                 href={item.link || ''}
               >
                 {t(item.name)}
