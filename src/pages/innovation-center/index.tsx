@@ -5,9 +5,11 @@ import { GetStaticProps } from 'next';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function InnovationCenter() {
   const t = useTranslations('InnovationCenter');
+  const { push } = useRouter();
 
   return (
     <>
@@ -31,10 +33,24 @@ export default function InnovationCenter() {
 
             <div className='mt-6 lg:mt-10'>
               <div className='flex items-start flex-col gap-4 lg:gap-8'>
-                {Array.from({ length: 4 }).map((_, index) => (
+                {[
+                  {
+                    //link: 'innovation-center/services',
+                  },
+                  {
+                    link: 'innovation-center/partners',
+                  },
+                  {
+                    //link: 'innovation-center/trainings',
+                  },
+                  {
+                    //link: 'innovation-center/projects',
+                  },
+                ].map((item, index) => (
                   <button
-                    disabled
-                    className='text-lg lg:text-xl font-semibold underline underline-offset-2 disabled:opacity-50'
+                    disabled={!item.link}
+                    onClick={() => push(item.link)}
+                    className='enabled:cursor-pointer text-lg lg:text-xl font-semibold underline underline-offset-2 disabled:opacity-50'
                   >
                     {t(`menu-${index + 1}`)}
                   </button>
@@ -91,7 +107,7 @@ export default function InnovationCenter() {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-6 lg:gap-y-6 px-8 lg:px-16'>
                   {Array.from({ length: 7 }).map((_, index) => (
                     <div className='flex items-center gap-4'>
-                      <ReactIcon width={32} height={32} />
+                      <ReactIcon width={32} height={32} className='shrink-0' />
                       <div className='text-lg lg:text-xl'>
                         {t(`technologies-${index + 1}`)}
                       </div>
@@ -100,8 +116,42 @@ export default function InnovationCenter() {
                 </div>
               </div>
             </div>
+
+            <div className='mt-6 lg:mt-10'>
+              <p className='text-lg lg:text-xl'>{t('purpose')}</p>
+              <div className='mt-5 lg:mt-8'>
+                <div className='grid grid-cols-1 gap-x-24 gap-y-6 lg:gap-y-6 px-8 lg:px-16'>
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <div className='flex items-center gap-4'>
+                      <ReactIcon width={32} height={32} className='shrink-0' />
+                      <div className='text-lg lg:text-xl'>
+                        {t(`purpose-${index + 1}`)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+
+        <div className='mt-6 lg:mt-10'>
+          <section
+            className='bg-no-repeat bg-cover bg-center w-full lg:py-14 py-8 flex-1'
+            style={{
+              backgroundImage: 'url("/innovation-center/background.webp")',
+            }}
+          >
+            <div className='h-full flex flex-col items-start justify-center px-5 lg:px-14'>
+              <div className='flex-1'>
+                <div className='flex flex-col gap-8 text-white bg-[#DDFDFF]/10 backdrop-blur-xl rounded-4xl py-12 lg:py-32 px-8 lg:px-16'>
+                  <p className='text-lg lg:text-xl leading-7.5'>{t('description-1')}</p>
+                  <p className='text-lg lg:text-xl leading-7.5'>{t('description-2')}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
     </>
   );

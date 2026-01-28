@@ -128,7 +128,7 @@ const Navbar: FC<NavbarProps> = () => {
             <div className='w-full flex items-center justify-between xl:justify-baseline gap-10'>
               <div className='xl:hidden'>
                 <MenuIcon
-                  onClick={() => setIsSidebarOpen((prev) => !prev)}
+                  onClick={() => setIsSidebarOpen(prev => !prev)}
                   className='size-8 cursor-pointer'
                 />
               </div>
@@ -192,7 +192,19 @@ const Navbar: FC<NavbarProps> = () => {
                 aria-disabled={!!item.link}
                 className={`${
                   !item.link ? 'pointer-events-none opacity-40' : ''
-                } hover:underline underline-offset-2 ${['/news', '/innovation-center'].some((item) => pathname.startsWith(item)) ? 'text-black' : ''}`}
+                } hover:underline underline-offset-2 ${
+                  [
+                    { link: '/news', exact: false },
+                    { link: '/innovation-center', exact: true },
+                    // { link: '/innovation-center/services', exact: true },
+                  ].some(item =>
+                    item.exact
+                      ? pathname === item.link
+                      : pathname.startsWith(item.link),
+                  )
+                    ? 'text-black'
+                    : ''
+                }`}
                 href={item.link || ''}
               >
                 {t(item.name)}
@@ -208,7 +220,7 @@ const Navbar: FC<NavbarProps> = () => {
               isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
             style={{
-              top: headerHeight
+              top: headerHeight,
             }}
             // ref={sidebarRef}
           >
@@ -262,7 +274,9 @@ const Navbar: FC<NavbarProps> = () => {
                       ) : (
                         <button
                           className={`cursor-pointer text-blue-primary transition-colors duration-200 text-left text-xl font-medium w-full disabled:opacity-50 ${
-                            pathname.startsWith(item.link || '') ? 'text-blue-primary' : ''
+                            pathname.startsWith(item.link || '')
+                              ? 'text-blue-primary'
+                              : ''
                           }`}
                           disabled={!item.link}
                           onClick={() => {
