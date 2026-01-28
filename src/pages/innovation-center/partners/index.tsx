@@ -5,9 +5,11 @@ import { GetStaticProps } from 'next';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function InnovationCenterPartners() {
   const t = useTranslations('InnovationCenterPartners');
+  const { push } = useRouter();
 
   return (
     <>
@@ -24,7 +26,9 @@ export default function InnovationCenterPartners() {
         >
           <div className='flex flex-col gap-4 px-8 lg:px-20 text-white mt-5 lg:mt-8'>
             <div className='text-lg lg:text-xl italic'>
-              {t('title')} {'>'} {t('partners')}
+              <span className='cursor-pointer' onClick={() => push('/innovation-center')}>
+                {t('title')}
+              </span> {'>'} {t('partners')}
             </div>
           </div>
           <div className='h-full flex w-full flex-col items-start justify-center px-8 lg:px-24 mt-5 lg:mt-8'>

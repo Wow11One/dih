@@ -20,7 +20,6 @@
         "industries-5": "New materials",
         "partners-description": "The infrastructure base for the Virtual Centre for Digital Science is the cloud cluster of the Ukrainian National Grid and the educational-research platform of the KAU Data Science Research Center. The implementation of the main project tasks focuses on the development of the UNG cloud grid infrastructure."
     },
-
     "Navbar": {
         "main": "Home",
         "about-us": "About Us",
@@ -29,21 +28,18 @@
         "fiware": "Fiware iHUB",
         "news": "News"
     },
-
     "AboutUs": {
         "paragraph-1": "Within the framework of the project of the Kyiv Academic University of the National Academy of Sciences of Ukraine and the Ministry of Education and Science of Ukraine (KAU) \"Development of the Virtual Centre of Digital Science\" under the targeted comprehensive programme of scientific research of the National Academy of Sciences of Ukraine \"Grid infrastructure and grid technologies for scientific and applied research\", during 2018–2019 a web catalogue of cloud services of the Virtual Centre of Digital Science (VCDS) was created on the basis of the cloud cluster of the Ukrainian National Grid.",
         "paragraph-2": "The cloud cluster enables efficient use of computing resources by implementing the \"on-demand resource allocation\" model. Currently, the UA-BITP cloud site is the only cloud resource in Ukraine that meets all EGI requirements for availability and reliability and is included in the EGI Federated Cloud resources.",
         "paragraph-3": "In 2020, the Bogolyubov Institute for Theoretical Physics of the National Academy of Sciences of Ukraine (ITP), which was authorised by the Government of Ukraine (letter of the Ministry of Education and Science of Ukraine No. 1/11-6930 dated 09.10.2020) to represent Ukraine in the EOSC Association, submitted an application for membership in the EOSC Association. On 21 October 2020, an ITP representative took part in the EOSC Symposium, where draft versions of key EOSC documents, including the EOSC Association Statutes, were presented.",
         "paragraph-4": "On 17 December 2020, during the meeting of the General Assembly (EOSC General Assembly), the Bogolyubov Institute for Theoretical Physics of the National Academy of Sciences of Ukraine was recognised as a full member of the EOSC Association as the official representative of Ukraine. The EOSC Association unites 142 members, including 21 members with a national mandate (including Ukraine) and 49 members with observer status. The members of the EOSC Association include leading European research organisations, resource centres, and providers of grid and cloud services actively involved in the implementation of the European Open Science Cloud concept."
     },
-
     "News": {
         "title": "News",
         "category": "Category",
         "leaveComment": "Leave a comment",
         "authorizeToLeaveComment": "To post a comment, you need to be authorised."
     },
-
     "InnovationCenter": {
         "title": "Digital Innovation Centre",
         "menu-1": "Services",
@@ -71,7 +67,6 @@
         "description-1": "NOSC-UA DIH was launched in 2021 as a non-profit project coordinated by the Kyiv Academic University (KAU) within the framework of the Targeted Programme of Scientific Research of the National Academy of Sciences of Ukraine (NASU) “Mathematical Modelling in Interdisciplinary Research of Processes and Systems Based on Intelligent Supercomputing, Grid and Cloud Technologies” for 2021–2025.",
         "description-2": "In January 2024, NOSC-UA DIH signed an agreement together with another Kyiv digital innovation hub “Centre 4.0 Igor Sikorsky Kyiv Polytechnic Institute” (Centre 4.0 KPI DIH) and 12 regional partners to establish the “Kyiv HighTech” DIH, coordinated by the Ukrainian Cluster Alliance. In July, within the Digital Europe Programme call, the “Kyiv HighTech” DIH received international status as a European Digital Innovation Hub (EDIH) from the European Commission."
     },
-
     "InnovationCenterPartners": {
         "title": "Digital Innovation Centre",
         "partners": "Partners",
@@ -99,5 +94,42 @@
         "enterprise-8": "AI House",
         "enterprise-9": "Elifsina",
         "enterprise-10": "Ideaforge"
+    },
+    "InnovationCenterServices": {
+        "breadcrumb": "Digital Innovation Centre",
+        "title": "Our Services",
+        "description": "NOSC-UA DIH offers a wide range of services to support the digital transformation of your business",
+        "service-1-title": "co-creation and piloting of digital innovation projects",
+        "service-1-description": "• Strategic support for research, development and innovation (R&D&I)\n\n• Contract research (e.g. specific R&D, technology concept development / proof of concept…)\n\n• Technical support for project scaling (e.g. defining functional requirements for digital products, proof of concept, prototyping…)\n\n• Provision of infrastructure (e.g. support in using cloud infrastructure, services and platforms such as i4Trust, FIWARE, iShare, DataverseUA, EOSC, EGI)",
+        "service-2-title": "investment support and fundraising, grants for digital innovation development",
+        "service-2-description": "• Individual and group fundraising consultations\n\n• Thematic seminars, webinars and training sessions\n\n• Selection of grant calls tailored to the client\n\n• Support with grant application submission and implementation\n\n• Consulting on business strategy and development\n\n• Legal support on intellectual property and technology transfer",
+        "service-3-title": "access to the innovation ecosystem and networking",
+        "service-3-description": "• Support and development of digital innovation ecosystems. Assistance at the stage of launching digital initiatives and shaping community development strategies (innovation networks, clusters, technology platforms, civic organisations, business initiatives)\n\n• Ecosystem events for SMEs (informational, educational and networking webinars, technology workshops, training courses; organisation of Innovation Days, brokerage events and networking sessions to initiate cooperation between businesses and research groups based on modern digital technologies)\n\n• Activities to support the development of Industry 5.0 and the digital ecosystem of the Kyiv region together with regional partners and public authorities\n\n• Technology scouting, ecosystem engagement and management (e.g. trend monitoring, technology and third-party research, ecosystem mapping, ecosystem management/orchestration, networking, matchmaking)\n\n• Support for access to international digital ecosystems and their services (EOSC, FIWARE, DIH World, EDIHs, i4Trust, iShare, Dataverse, EGI)",
+        "service-4-title": "training / digital skills development",
+        "service-4-description": "• Organisation of educational events (webinars, schools, workshops)\n\n• Training sessions (online and offline)\n\n• Access to training courses and learning platforms\n\n• Technology consulting (with the support of platforms such as FIWARE, EOSC, EGI, Dataverse)",
+        "service-5-title": "data analytics, data strategy",
+        "service-5-description": "• Assessment of data management maturity\n\n• Development of a data strategy: alignment with business strategy; data use cases; operational model for data usage\n\n• Enterprise data management: data location, quality and security, analytics and statistical data\n\n• Data analysis",
+        "service-6-title": "data exchange and processing, data spaces",
+        "service-6-description": "• Use of technologies for building data spaces and digital twins\n\n• Technical consulting during the creation, connection, integration and operation of data spaces for secure and efficient data management, integration and sharing\n\n• Use of data space technologies, including compliance with i4Trust requirements, FIWARE building blocks and security policies, as well as the use of digital twins based on Smart Data Models\n\n• Data interoperability solutions to enable seamless data exchange between machines and systems in your industrial environment\n\n• Improvement of cyber-physical industrial systems (CPIS) development and management through the integration of Model-Based Engineering (MBE), digital twins and DevOps practices\n\n• Data-driven business models to generate new revenue streams and increase efficiency",
+        "service-7-title": "cloud technologies",
+        "service-7-description": "• Use of cloud technologies, architecture design and configuration of cloud infrastructure\n\n• Access to the NOSC-UA cloud platform for research and innovation requiring big data processing, cloud computing and modelling\n\n• Technical support for access to cloud resources: virtual servers, resource monitoring, ready-to-use runtime environments and applications (SaaS), data storage for virtual environments, cloud computing, HPC\n\n• Assistance in accessing cloud resources of EOSC ecosystem providers\n\n• Access to advanced computing services of EGI",
+        "service-8-title": "artificial intelligence and machine learning",
+        "service-8-description": "• Consulting on the use of AI/ML technologies, problem definition, selection of tools and methods\n\n• Case studies and model testing: data exploration, preprocessing and feature engineering, intelligent data analysis (training, testing and cross-validation of AI/ML models)\n\n• Creation, integration and operation of AI/ML-based solutions\n\n• Cloud computing and modelling based on artificial intelligence technologies, cloud services for deep learning workloads\n\n• Development of systems for automated creation and updating of predictive models for defined problems\n\n• Development of AI/ML applications",
+        "service-9-title": "blockchain",
+        "service-9-description": "Blockchain Consulting is a service that helps companies implement blockchain technology in their business. Blockchain consultants can help companies:\n\n• Determine whether blockchain is suitable for the client’s needs\n\n• Develop a blockchain implementation strategy\n\n• Select the appropriate blockchain platform\n\n• Implement blockchain solutions\n\n• Integrate blockchain with existing systems\n\n• Train staff to work with blockchain\n\n• Expansion of educational opportunities – comprehensive training on blockchain fundamentals and applications\n\n• Strategic design thinking – dedicated sessions to explore blockchain opportunities and map integration strategies\n\n• Idea validation and optimisation – rigorous assessment of concepts for viability and recommendations for improvement",
+        "service-10-title": "cybersecurity",
+        "service-10-description": "• Organisation of cybersecurity for information systems\n\n• Incident response and recovery: detection and removal of malicious code; investigation of infections or breaches; protection against reinfection\n\n• Reverse engineering of iOS/Android mobile applications\n\n• Penetration testing: assessment of website security level and vulnerability detection\n\n• 24/7 monitoring and protection: round-the-clock protection of web resources or information systems",
+        "service-11-title": "prototyping, 3D modelling and 3D printing",
+        "service-11-description": "• Manufacturing / design of technological equipment and its components\n\n• 2D and 3D modelling\n\n• 3D printing using FDM and SLA technologies\n\n• Mechanical processing (turning, milling, grinding)\n\n• Metal rolling, production of strips and foils\n\n• Cold gas-dynamic spraying of functional and protective coatings; thermal spraying\n\n• Vacuum induction melting of alloys; vacuum annealing; annealing and air hardening with heating up to 1300°C\n\n• Manufacturing of glass products (including quartz materials) for scientific research needs: laboratory equipment for chemical and physical research\n\n• Laser cutting and engraving (plywood, plastic (except PVC), textiles)",
+        "service-12-title": "digital marketing strategy development",
+        "service-12-description": "• Digitisation of business objectives\n\n• Review of digital channels and social media traffic\n\n• Vision for promotion across channels\n\n• Communication model\n\n• Tools and technical solutions\n\n• Sub-channel strategies – SEO / PPC / SMM"
+    },
+    "InnovationCenterTraining": {
+        "breadcrumb": "Digital Innovation Centre",
+        "title": "Training and Competencies",
+        "events": "Events",
+        "training": "Training",
+        "training-courses": "Training and Courses",
+        "lectures": "Lectures and Seminars"
     }
 }

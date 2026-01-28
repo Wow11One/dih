@@ -196,6 +196,7 @@ const Navbar: FC<NavbarProps> = () => {
                   [
                     { link: '/news', exact: false },
                     { link: '/innovation-center', exact: true },
+                    { link: '/innovation-center/training', exact: true },
                     // { link: '/innovation-center/services', exact: true },
                   ].some(item =>
                     item.exact

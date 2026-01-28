@@ -18,7 +18,7 @@ export default function InnovationCenter() {
       </Head>
       <main className='w-full flex flex-col flex-1'>
         <section className='w-full lg:pt-28 pt-14 pb-16 flex-1'>
-          <div className='h-full flex flex-col flex-1 items-start justify-center px-5 lg:px-14'>
+          <div className='h-full flex flex-col flex-1 items-start justify-center px-8 lg:px-20'>
             <div className='flex gap-8 lg:gap-16'>
               <div className='flex flex-col gap-4'>
                 <div className='text-xl lg:text-2xl font-bold'>
@@ -35,13 +35,13 @@ export default function InnovationCenter() {
               <div className='flex items-start flex-col gap-4 lg:gap-8'>
                 {[
                   {
-                    //link: 'innovation-center/services',
+                    link: 'innovation-center/services',
                   },
                   {
                     link: 'innovation-center/partners',
                   },
                   {
-                    //link: 'innovation-center/trainings',
+                    link: 'innovation-center/training',
                   },
                   {
                     //link: 'innovation-center/projects',
