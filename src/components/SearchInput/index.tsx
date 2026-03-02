@@ -19,7 +19,7 @@ export default function SearchInput({
   };
 
   return (
-    <div className='relative w-full max-w-md'>
+    <div className='relative w-full max-w-md invisible'>
       <input
         type='text'
         placeholder={placeholder}

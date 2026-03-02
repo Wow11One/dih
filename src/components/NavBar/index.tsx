@@ -1,42 +1,8 @@
-// import { AppLogo, BritishFlag, FrenchFlag, SpanishFlag, UkrainianFlag } from '@/components/Icons';
-// import { ApplicationRoutes } from '@/constants/applicationRoutes';
-// import { ApplicationLanguages } from '@/constants/languages';
-// import { navigationItems } from '@/constants/navigationItems';
-// import screenSizes from '@/constants/screenSizes';
-// import useChangePage from '@/hooks/useChangePage';
-// import useLocationSearch from '@/hooks/useLocationSearch';
-// import { useOutsideClick } from '@/hooks/useOutsideClick';
-// import useScreenSizeType from '@/hooks/useScreenSizeType';
-// import { Check, ChevronDown, ChevronRight, Facebook, Linkedin, Mail, Menu } from 'lucide-react';
 import { FC, useEffect, useRef, useState } from 'react';
-// import { useIntl } from 'react-intl';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
-import SearchInput from '../SearchInput';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import MenuIcon from '../icons/Menu';
-import { it } from 'node:test';
-
-// const languages = [
-//   {
-//     logo: <BritishFlag className='size-8 lg:size-10' />,
-//     name: ApplicationLanguages.English,
-//   },
-//   {
-//     logo: <UkrainianFlag className='size-8 lg:size-10' />,
-//     name: ApplicationLanguages.Ukrainian,
-//   },
-//   {
-//     logo: <FrenchFlag className='size-8 lg:size-10' />,
-//     name: ApplicationLanguages.French,
-//   },
-//   {
-//     logo: <SpanishFlag className='size-8 lg:size-10' />,
-//     name: ApplicationLanguages.Spanish,
-//   },
-// ];
 
 const routes = [
   {
@@ -64,26 +30,11 @@ const routes = [
 ];
 
 const Navbar: FC<NavbarProps> = () => {
-  //   const { formatMessage } = useIntl();
-  //   const changePage = useChangePage();
-  //   const locationSearch = useLocationSearch();
-  //   const currentScreenType = useScreenSizeType();
-  //   const { isBiggerThanCurrentSizeType, sizeTypes } = screenSizes;
   const { locale, asPath, push } = useRouter();
   const t = useTranslations('Navbar');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [isLanguageBarOpen, setIsLanguageBarOpen] = useState<boolean>(false);
-  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(
-    null,
-  );
   const headerRef = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useState<number>(0);
-  //   const sidebarRef = useOutsideClick(() => setIsSidebarOpen(false), [headerRef]);
-  //   const languageRef = useOutsideClick(() => setIsLanguageBarOpen(false));
-
-  const toggleMobileSubmenu = (itemName: string) => {
-    setExpandedMobileMenu(expandedMobileMenu === itemName ? null : itemName);
-  };
   const pathname = usePathname();
 
   const [showHeader, setShowHeader] = useState(true);
@@ -106,13 +57,43 @@ const Navbar: FC<NavbarProps> = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [headerHeight]);
 
   useEffect(() => {
     if (headerRef.current?.offsetHeight) {
       setHeaderHeight(headerRef.current?.offsetHeight);
     }
   }, [headerRef.current?.offsetHeight]);
+
+  const isActiveRoute = (route: typeof routes[0]) => {
+    if (!route.link) return false;
+    
+    // Exact match for home page
+    if (route.link === '/' && pathname === '/') return true;
+    
+    // For other routes, check if pathname starts with the route link
+    if (route.link !== '/' && pathname.startsWith(route.link)) return true;
+    
+    return false;
+  };
+
+  const getTextColor = (route: typeof routes[0]) => {
+    // Check if current page matches specific routes that should be black
+    const blackRoutes = [
+      { link: '/innovation-center/digital-technologies', exact: false },
+      { link: '/news', exact: false },
+      { link: '/innovation-center', exact: true },
+      { link: '/innovation-center/training', exact: true },
+    ];
+
+    const shouldBeBlack = blackRoutes.some(item =>
+      item.exact
+        ? pathname === item.link
+        : pathname.startsWith(item.link),
+    );
+
+    return shouldBeBlack ? 'text-black' : 'text-white';
+  };
 
   return (
     <>
@@ -127,10 +108,22 @@ const Navbar: FC<NavbarProps> = () => {
             {/* Logo */}
             <div className='w-full flex items-center justify-between xl:justify-baseline gap-10'>
               <div className='xl:hidden'>
-                <MenuIcon
+                {/* Menu Icon SVG */}
+                <svg
                   onClick={() => setIsSidebarOpen(prev => !prev)}
                   className='size-8 cursor-pointer'
-                />
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    d='M3 12H21M3 6H21M3 18H21'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                </svg>
               </div>
 
               <img
@@ -160,11 +153,20 @@ const Navbar: FC<NavbarProps> = () => {
 
             {/* Desktop Right Side */}
             <div className='hidden xl:flex items-center xl:space-x-12 text-xl'>
+              {/* Search Input Placeholder */}
+              <div className='relative invisible'>
+                <input
+                  type='text'
+                  placeholder='Search...'
+                  className='px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+              </div>
+              
               <div className='flex items-center gap-1'>
                 <Link
                   href={asPath}
                   locale='uk'
-                  className={`${locale === 'uk' ? 'font-bold' : ''}`}
+                  className={`transition-all ${locale === 'uk' ? 'font-bold' : 'hover:font-semibold'}`}
                 >
                   UA
                 </Link>
@@ -172,39 +174,30 @@ const Navbar: FC<NavbarProps> = () => {
                 <Link
                   href={asPath}
                   locale='en'
-                  className={`${locale === 'en' ? 'font-bold' : ''}`}
+                  className={`transition-all ${locale === 'en' ? 'font-bold' : 'hover:font-semibold'}`}
                 >
                   EN
                 </Link>
               </div>
-
-              <SearchInput />
             </div>
           </div>
 
+          {/* Desktop Navigation */}
           <nav
-            className={`absolute w-full left-0 -bottom-12 px-20 transition-opacity hidden xl:flex items-center justify-between text-white text-xl ${
+            className={`absolute w-full left-0 -bottom-12 px-20 transition-opacity hidden xl:flex items-center justify-between text-xl ${
               showHeader || isSidebarOpen ? 'opacity-100' : 'opacity-0'
             }`}
           >
             {routes.map(item => (
               <Link
-                aria-disabled={!!item.link}
-                className={`${
+                key={item.name}
+                aria-disabled={!item.link}
+                className={`relative transition-all duration-200 ${
                   !item.link ? 'pointer-events-none opacity-40' : ''
-                } hover:underline underline-offset-2 ${
-                  [
-                    { link: '/news', exact: false },
-                    { link: '/innovation-center', exact: true },
-                    { link: '/innovation-center/training', exact: true },
-                    // { link: '/innovation-center/services', exact: true },
-                  ].some(item =>
-                    item.exact
-                      ? pathname === item.link
-                      : pathname.startsWith(item.link),
-                  )
-                    ? 'text-black'
-                    : ''
+                } ${getTextColor(item)} ${
+                  isActiveRoute(item)
+                    ? 'font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-current'
+                    : 'hover:opacity-80'
                 }`}
                 href={item.link || ''}
               >
@@ -215,87 +208,87 @@ const Navbar: FC<NavbarProps> = () => {
         </div>
 
         {/* Mobile Menu Overlay */}
-        <>
+        <div
+          className={`overflow-y-auto xl:hidden fixed z-50 left-0 h-screen w-[70%] bg-white transform transition-transform duration-300 ease-in-out ${
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          style={{
+            top: headerHeight,
+          }}
+        >
+          <div className='flex flex-col h-full'>
+            {/* Mobile Navigation */}
+            <nav className='flex-1 px-4 py-6'>
+              <ul className='space-y-6'>
+                {routes.map(item => (
+                  <li key={item.name}>
+                    <button
+                      className={`relative text-left text-xl font-medium w-full transition-all duration-200 ${
+                        !item.link 
+                          ? 'opacity-50 cursor-not-allowed' 
+                          : 'cursor-pointer hover:translate-x-2'
+                      } ${
+                        isActiveRoute(item)
+                          ? 'text-blue-600 font-bold border-l-4 border-blue-600 pl-4'
+                          : 'text-gray-700 pl-4'
+                      }`}
+                      disabled={!item.link}
+                      onClick={() => {
+                        if (!item.link) return;
+                        push(item.link);
+                        setIsSidebarOpen(false);
+                      }}
+                    >
+                      {t(item.name)}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Mobile Language Switcher */}
+              <div className='mt-8 pt-8 border-t border-gray-200'>
+                <div className='flex items-center gap-4 px-4'>
+                  <Link
+                    href={asPath}
+                    locale='uk'
+                    className={`text-lg transition-all ${
+                      locale === 'uk' 
+                        ? 'font-bold text-blue-600' 
+                        : 'text-gray-600 hover:text-blue-600'
+                    }`}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    UA
+                  </Link>
+                  <div className='text-gray-400'>|</div>
+                  <Link
+                    href={asPath}
+                    locale='en'
+                    className={`text-lg transition-all ${
+                      locale === 'en' 
+                        ? 'font-bold text-blue-600' 
+                        : 'text-gray-600 hover:text-blue-600'
+                    }`}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    EN
+                  </Link>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        {/* Mobile Overlay Background */}
+        {isSidebarOpen && (
           <div
-            className={`overflow-y-auto xl:hidden fixed z-50 left-0 h-screen w-[50%] bg-white transform transition-transform duration-300 ease-in-out ${
-              isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
+            className='fixed inset-0 bg-black bg-opacity-50 xl:hidden'
             style={{
               top: headerHeight,
             }}
-            // ref={sidebarRef}
-          >
-            <div className='flex flex-col h-full'>
-              {/* Mobile Navigation */}
-              <nav className='flex-1 px-4 py-6'>
-                <ul className='space-y-8'>
-                  {routes.map(item => (
-                    <li key={item.name}>
-                      {false ? (
-                        <div>
-                          <button
-                            onClick={() => toggleMobileSubmenu(item.name)}
-                            className={`text-white hover:text-blue-primary transition-colors duration-200 text-left text-xl font-semibold w-full flex items-center gap-1 ${
-                              pathname.startsWith(item.link || '')
-                                ? // || item.subItems?.some(route => route.route === pathname)
-                                  'bg-blue-primary'
-                                : ''
-                            }`}
-                          >
-                            <span>
-                              {/* {t({ id: item.name })} */}
-                              {t(item.name)}
-                            </span>
-                            {/* <ChevronRight
-                              className={`w-5 h-5 transition-transform duration-200 ${
-                                expandedMobileMenu === item.name ? 'rotate-90' : ''
-                              }`}
-                            /> */}
-                          </button>
-                          {/* {expandedMobileMenu === item.name && (
-                            <ul className='mt-3 ml-4 space-y-4'>
-                              {item.subItems?.map(subItem => (
-                                <li key={subItem.name}>
-                                  <button
-                                    onClick={() => {
-                                      //changePage({ pathname: subItem.route! });
-                                      setIsSidebarOpen(false);
-                                    }}
-                                    className={`cursor-pointer text-gray-300 hover:text-teal-300 transition-colors duration-200 text-left text-lg ${
-                                      subItem.route === pathname ? 'font-semibold' : ''
-                                    }`}
-                                  >
-                                    {formatMessage({ id: subItem.name })}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          )} */}
-                        </div>
-                      ) : (
-                        <button
-                          className={`cursor-pointer text-blue-primary transition-colors duration-200 text-left text-xl font-medium w-full disabled:opacity-50 ${
-                            pathname.startsWith(item.link || '')
-                              ? 'text-blue-primary'
-                              : ''
-                          }`}
-                          disabled={!item.link}
-                          onClick={() => {
-                            if (!item.link) return;
-                            push(item.link);
-                            setIsSidebarOpen(false);
-                          }}
-                        >
-                          {t(item.name)}
-                        </button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </>
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
       </header>
 
       <div

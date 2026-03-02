@@ -7,6 +7,7 @@ import ReactIcon from '@/components/icons/React';
 import { GetStaticProps } from 'next';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
+import Link from 'next/link';
 
 
 export default function Landing() {
@@ -75,9 +76,9 @@ export default function Landing() {
           </div>
 
           <div className='mt-6 lg:mt-12 flex justify-center'>
-            <button className='text-lg lg:text-xl font-bold text-white bg-blue-secondary py-5 px-9 rounded-2xl'>
+            <Link href="/innovation-center/services" className='cursor-pointer text-lg lg:text-xl font-bold text-white bg-blue-secondary py-5 px-9 rounded-2xl'>
               {t('more-services')}
-            </button>
+            </Link>
           </div>
         </section>
 
