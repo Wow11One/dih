@@ -5,8 +5,13 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p 3005",
+    "lint": "next lint",
+    "docker:build": "docker build -t dih .",
+    "docker:start": "docker run -d --restart unless-stopped -p 3005:3005 --name dih dih",
+    "docker:stop": "docker stop dih && docker rm dih",
+    "docker:restart": "npm run docker:stop && npm run docker:start",
+    "docker:logs": "docker logs -f dih"
   },
   "dependencies": {
     "next": "15.3.7",
