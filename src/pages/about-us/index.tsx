@@ -38,7 +38,6 @@ export default function AboutUs() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  console.log('(await import(`@/messages/${locale}.json`))', (await import(`@/messages/${locale}.json`)).default)
   return {
     props: {
       messages: (await import(`@/messages/${locale}.json`)).default,

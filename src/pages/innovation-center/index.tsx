@@ -1,10 +1,7 @@
-import CommentIcon from '@/components/icons/Comment';
-import NewsDateIcon from '@/components/icons/NewsDate';
 import ReactIcon from '@/components/icons/React';
 import { GetStaticProps } from 'next';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export default function InnovationCenter() {
@@ -17,7 +14,7 @@ export default function InnovationCenter() {
         <title>DIH | Innovation center</title>
       </Head>
       <main className='w-full flex flex-col flex-1'>
-        <section className='w-full lg:pt-28 pt-14 pb-16 flex-1'>
+        <section className='w-full lg:pt-20 pt-10 pb-16 flex-1'>
           <div className='h-full flex flex-col flex-1 items-start justify-center px-8 lg:px-20'>
             <div className='flex gap-8 lg:gap-16'>
               <div className='flex flex-col gap-4'>
@@ -70,23 +67,37 @@ export default function InnovationCenter() {
                 {[
                   {
                     image: '/innovation-center/ai.webp',
+                    link: '/innovation-center/digital-technologies/artificial-intelligience',
                   },
                   {
                     image: '/innovation-center/data-space.webp',
+                    link: '/innovation-center/digital-technologies/cloud-technologies',
                   },
                   {
                     image: '/innovation-center/blockchain.webp',
+                    link: '/innovation-center/digital-technologies/blockchain',
                   },
                   {
                     image: '/innovation-center/digital-technology.webp',
+                    link: '/innovation-center/digital-technologies/cloud-technologies',
                   },
                   {
                     image: '/innovation-center/esg-technology.webp',
+                    link: '/innovation-center/digital-technologies/cloud-technologies',
+                  },
+                  {
+                    image: '/innovation-center/cybersecurity.webp',
+                    link: '/innovation-center/digital-technologies/cybersecurity',
+                  },
+                  {
+                    image: '/innovation-center/software-planning.webp',
+                    link: '/innovation-center/digital-technologies/software-architecture',
                   },
                 ].map((item, index) => (
-                  <div
+                  <button
+                    onClick={() => push(item.link)}
                     key={index}
-                    className='relative overflow-hidden rounded-[36px] py-10 lg:py-20 px-4 min-h-[120px] flex items-center justify-center'
+                    className='cursor-pointer transition-transform hover:scale-105 relative overflow-hidden rounded-[36px] py-10 lg:py-20 px-4 min-h-[120px] flex items-center justify-center'
                     style={{
                       backgroundImage: `url(${item.image})`,
                       backgroundSize: 'cover',
@@ -99,7 +110,7 @@ export default function InnovationCenter() {
                         {t(`services-${index + 1}`)}
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -148,8 +159,12 @@ export default function InnovationCenter() {
             <div className='h-full flex flex-col items-start justify-center px-5 lg:px-14'>
               <div className='flex-1'>
                 <div className='flex flex-col gap-8 text-white bg-[#DDFDFF]/10 backdrop-blur-xl rounded-4xl py-12 lg:py-32 px-8 lg:px-16'>
-                  <p className='text-lg lg:text-xl leading-7.5'>{t('description-1')}</p>
-                  <p className='text-lg lg:text-xl leading-7.5'>{t('description-2')}</p>
+                  <p className='text-lg lg:text-xl leading-7.5'>
+                    {t('description-1')}
+                  </p>
+                  <p className='text-lg lg:text-xl leading-7.5'>
+                    {t('description-2')}
+                  </p>
                 </div>
               </div>
             </div>

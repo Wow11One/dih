@@ -60,6 +60,18 @@ export default function InnovationCenterServices() {
       title: t('service-12-title'),
       description: t('service-12-description'),
     },
+    {
+      title: t('service-13-title'),
+      description: t('service-13-description'),
+    },
+    {
+      title: t('service-14-title'),
+      description: t('service-14-description'),
+    },
+    {
+      title: t('service-15-title'),
+      description: t('service-15-description'),
+    },
   ];
 
   const toggleService = (index: number) => {
@@ -106,6 +118,19 @@ export default function InnovationCenterServices() {
             {/* Services List */}
             <div className='w-full'>
               <div className='bg-white backdrop-blur-md rounded-4xl py-8 lg:py-12 px-6 lg:px-12'>
+                {/* Form Notice */}
+                <p className='text-lg lg:text-xl mb-6 px-4'>
+                  {t('form-notice')}{' '}
+                  <a
+                    href='https://forms.gle/zkbstqYviWeixNbNA'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='underline font-medium text-blue-primary'
+                  >
+                    {t('form-notice-link')}
+                  </a>
+                  .
+                </p>
                 <div className=''>
                   {services.map((service, index) => (
                     <div
@@ -152,7 +177,7 @@ export default function InnovationCenterServices() {
                         }`}
                       >
                         <div className='px-4 lg:px-16 pb-6 pt-2'>
-                          <div className='text-base lg:text-lg text-gray-700 leading-relaxed whitespace-pre-line'>
+                          <div className='text-base lg:text-lg text-gray-700 whitespace-pre-line'>
                             {service.description}
                           </div>
                         </div>

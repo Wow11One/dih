@@ -19,6 +19,7 @@ const routes = [
   },
   {
     name: 'science-service',
+    link: '/science-services',
   },
   {
     name: 'fiware',
@@ -81,6 +82,7 @@ const Navbar: FC<NavbarProps> = () => {
     // Check if current page matches specific routes that should be black
     const blackRoutes = [
       { link: '/innovation-center/digital-technologies', exact: false },
+      { link: '/science-services', exact: false },
       { link: '/news', exact: false },
       { link: '/innovation-center', exact: true },
       { link: '/innovation-center/training', exact: true },
@@ -98,9 +100,7 @@ const Navbar: FC<NavbarProps> = () => {
   return (
     <>
       <header
-        className={`fixed bg-white w-full z-50 transition-transform duration-300 ${
-          showHeader || isSidebarOpen ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        className={`absolute bg-white w-full z-50 transition-transform duration-300`}
         ref={headerRef}
       >
         <div className='w-full mx-auto my-auto px-4 md:px-10 lg:px-16 z-50 relative'>
@@ -114,7 +114,6 @@ const Navbar: FC<NavbarProps> = () => {
                   className='size-8 cursor-pointer'
                   viewBox='0 0 24 24'
                   fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
                 >
                   <path
                     d='M3 12H21M3 6H21M3 18H21'
@@ -129,23 +128,26 @@ const Navbar: FC<NavbarProps> = () => {
               <img
                 src='/header/nosc.png'
                 alt='nosc'
-                className='w-[150px] h-[84px] lg:w-[170px] lg:h-[95px]'
+                className='w-[150px] h-[84px] lg:w-[170px] lg:h-[95px] cursor-pointer'
+                onClick={() => push('/')}
               />
 
               <img
-                className='hidden xl:block'
+                className='hidden xl:block cursor-pointer'
                 src='/header/edih.png'
                 alt='edih'
                 width={140}
                 height={55}
+                onClick={() => push('/')}
               />
 
               <img
-                className='hidden xl:block'
+                className='hidden xl:block cursor-pointer'
                 src='/header/fiware.png'
                 alt='fiware'
                 width={230}
                 height={40}
+                onClick={() => push('/')}
               />
 
               <div />
@@ -229,7 +231,7 @@ const Navbar: FC<NavbarProps> = () => {
                           : 'cursor-pointer hover:translate-x-2'
                       } ${
                         isActiveRoute(item)
-                          ? 'text-blue-600 font-bold border-l-4 border-blue-600 pl-4'
+                          ? 'text-blue-primary font-bold border-l-4 border-blue-primary pl-4'
                           : 'text-gray-700 pl-4'
                       }`}
                       disabled={!item.link}
@@ -253,8 +255,8 @@ const Navbar: FC<NavbarProps> = () => {
                     locale='uk'
                     className={`text-lg transition-all ${
                       locale === 'uk' 
-                        ? 'font-bold text-blue-600' 
-                        : 'text-gray-600 hover:text-blue-600'
+                        ? 'font-bold text-blue-primary' 
+                        : 'text-gray-600 hover:text-blue-primary'
                     }`}
                     onClick={() => setIsSidebarOpen(false)}
                   >
@@ -266,8 +268,8 @@ const Navbar: FC<NavbarProps> = () => {
                     locale='en'
                     className={`text-lg transition-all ${
                       locale === 'en' 
-                        ? 'font-bold text-blue-600' 
-                        : 'text-gray-600 hover:text-blue-600'
+                        ? 'font-bold text-blue-primary' 
+                        : 'text-gray-600 hover:text-blue-primary'
                     }`}
                     onClick={() => setIsSidebarOpen(false)}
                   >
@@ -282,7 +284,7 @@ const Navbar: FC<NavbarProps> = () => {
         {/* Mobile Overlay Background */}
         {isSidebarOpen && (
           <div
-            className='fixed inset-0 bg-black bg-opacity-50 xl:hidden'
+            className='fixed inset-0 bg-black/50 xl:hidden'
             style={{
               top: headerHeight,
             }}

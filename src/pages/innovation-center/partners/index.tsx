@@ -50,7 +50,7 @@ export default function InnovationCenterPartners() {
                         alt={partner.alt}
                         width={partner.width}
                         height={partner.height}
-                        className='object-contain transition-transform hover:scale-110'
+                        className='object-contain transition-transform hover:scale-105'
                       />
                     </div>
                   ))}

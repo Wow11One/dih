@@ -9,7 +9,6 @@ import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import Link from 'next/link';
 
-
 export default function Landing() {
   const t = useTranslations('Landing');
 
@@ -76,7 +75,10 @@ export default function Landing() {
           </div>
 
           <div className='mt-6 lg:mt-12 flex justify-center'>
-            <Link href="/innovation-center/services" className='cursor-pointer text-lg lg:text-xl font-bold text-white bg-blue-secondary py-5 px-9 rounded-2xl'>
+            <Link
+              href='/innovation-center/services'
+              className='cursor-pointer text-lg lg:text-xl font-bold text-white bg-blue-secondary py-5 px-9 rounded-2xl'
+            >
               {t('more-services')}
             </Link>
           </div>
@@ -156,12 +158,11 @@ export default function Landing() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  console.log('(await import(`@/messages/${locale}.json`))', (await import(`@/messages/${locale}.json`)).default)
   return {
     props: {
       messages: (await import(`@/messages/${locale}.json`)).default,
       locale,
-    }
+    },
   };
 };
 
