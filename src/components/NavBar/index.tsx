@@ -23,6 +23,7 @@ const routes = [
   },
   {
     name: 'fiware',
+    link: '/fiware',
   },
   {
     name: 'news',
@@ -66,6 +67,30 @@ const Navbar: FC<NavbarProps> = () => {
     }
   }, [headerRef.current?.offsetHeight]);
 
+  useEffect(() => {
+    if (!isSidebarOpen) return;
+
+    const scrollY = window.scrollY;
+    const { style } = document.body;
+    const previousOverflow = style.overflow;
+    const previousPosition = style.position;
+    const previousTop = style.top;
+    const previousWidth = style.width;
+
+    style.overflow = 'hidden';
+    style.position = 'fixed';
+    style.top = `-${scrollY}px`;
+    style.width = '100%';
+
+    return () => {
+      style.overflow = previousOverflow;
+      style.position = previousPosition;
+      style.top = previousTop;
+      style.width = previousWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [isSidebarOpen]);
+
   const isActiveRoute = (route: typeof routes[0]) => {
     if (!route.link) return false;
     
@@ -86,6 +111,7 @@ const Navbar: FC<NavbarProps> = () => {
       { link: '/news', exact: false },
       { link: '/innovation-center', exact: true },
       { link: '/innovation-center/training', exact: true },
+      { link: '/fiware', exact: false },
     ];
 
     const shouldBeBlack = blackRoutes.some(item =>
