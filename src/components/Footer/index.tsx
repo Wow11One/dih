@@ -15,9 +15,9 @@ export default function Footer() {
           <div>
             <a
               className='text-lg lg:text-xl underline underline-offset-2'
-              href='mailto:a.kushnir@kau.edu.ua'
+              href='mailto:nochvai@gmail.com '
             >
-              a.kushnir@kau.edu.ua
+              nochvai@gmail.com 
             </a>
           </div>
         </div>
