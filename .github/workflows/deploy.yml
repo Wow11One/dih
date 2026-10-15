@@ -14,12 +14,18 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          command_timeout: 30m
           script: |
             set -e
             cd ${{ secrets.PROJECT_PATH }}
             git pull --rebase
-            docker stop dih || true
-            docker rm dih || true
-            docker build -t dih .
-            docker run -d --restart unless-stopped -p 3005:3005 --name dih dih
+            test -f .env || { echo ".env is missing in $(pwd), see .env.example"; exit 1; }
+            # Build first so the site stays up while the image builds.
+            docker compose build app
+            # One-time: remove the old container started with `docker run`
+            # (not managed by compose) that holds the `dih` name.
+            if [ -z "$(docker inspect -f '{{ index .Config.Labels "com.docker.compose.project" }}' dih 2>/dev/null)" ]; then
+              docker rm -f dih 2>/dev/null || true
+            fi
+            docker compose up -d
             docker image prune -f

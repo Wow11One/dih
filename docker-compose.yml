@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-}
+    container_name: dih
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://dih:${POSTGRES_PASSWORD:-dih}@db:5432/dih
+    ports:
+      - '3005:3005'
+    volumes:
+      # Only used when S3 isn't configured.
+      - media:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    container_name: dih-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dih
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dih}
+      POSTGRES_DB: dih
+    ports:
+      # Localhost only: for local dev and SSH tunnels, not exposed publicly.
+      - '127.0.0.1:5434:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U dih -d dih']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
+  media:

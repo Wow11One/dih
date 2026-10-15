@@ -20,7 +20,11 @@ const openSansMono = Open_Sans({
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
-    <IntlProvider locale={router.locale!} messages={pageProps.messages}>
+    <IntlProvider
+      locale={router.locale!}
+      messages={pageProps.messages}
+      timeZone='Europe/Kyiv'
+    >
       <style jsx global>
         {`
           :root {

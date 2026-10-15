@@ -2,28 +2,42 @@
   "name": "dih",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.4.1",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --turbopack",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=4096\" next build",
     "start": "next start -p 3005",
-    "lint": "next lint",
-    "docker:build": "docker build -t dih .",
-    "docker:start": "docker run -d --restart unless-stopped -p 3005:3005 --name dih dih",
-    "docker:stop": "docker stop dih && docker rm dih",
-    "docker:restart": "npm run docker:stop && npm run docker:start",
-    "docker:logs": "docker logs -f dih"
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "generate:types": "pnpm payload generate:types",
+    "generate:importmap": "pnpm payload generate:importmap",
+    "migrate:create": "pnpm payload migrate:create",
+    "db:up": "docker compose up -d db",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f app"
   },
   "dependencies": {
-    "next": "15.3.7",
+    "@payloadcms/db-postgres": "3.90.2",
+    "@payloadcms/next": "3.90.2",
+    "@payloadcms/richtext-lexical": "3.90.2",
+    "@payloadcms/storage-s3": "3.90.2",
+    "@payloadcms/translations": "3.90.2",
+    "@payloadcms/ui": "3.90.2",
+    "graphql": "^16.14.2",
+    "next": "15.3.9",
     "next-intl": "^4.5.5",
+    "payload": "3.90.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5"
   }

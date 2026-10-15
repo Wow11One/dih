@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DIH — NOSC-UA Digital Innovation Hub
 
-## Getting Started
+Website of the NOSC-UA Digital Innovation Hub. Built with Next.js 15 (Pages Router), React 19, Tailwind CSS v4 and `next-intl`, with Payload CMS 3 on Postgres for news and science posts. Available in Ukrainian (default) and English.
 
-First, run the development server:
+## Getting started
+
+Requirements: Node.js 20+, pnpm, Docker.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+cp .env.example .env      # then fill in PAYLOAD_SECRET (and S3_* if needed)
+pnpm install
+pnpm db:up                # Postgres on localhost:5434
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Site: [http://localhost:3000](http://localhost:3000). The English version is served under `/en`.
+- Admin: [http://localhost:3000/admin](http://localhost:3000/admin). On an empty database, the first account you create becomes the **superadmin**. A fresh database is also seeded with the posts from the original design.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command                     | Description                                         |
+| --------------------------- | --------------------------------------------------- |
+| `pnpm dev`                  | Dev server (Turbopack), port 3000                   |
+| `pnpm build`                | Production build                                    |
+| `pnpm start`                | Serve the production build, port 3005               |
+| `pnpm exec tsc --noEmit`    | Type check                                          |
+| `pnpm db:up`                | Start only Postgres from docker-compose             |
+| `pnpm generate:types`       | Regenerate `src/payload-types.ts`                   |
+| `pnpm generate:importmap`   | Regenerate the admin import map                     |
+| `pnpm migrate:create <name>`| Create a DB migration after changing collections    |
+| `pnpm docker:up`            | Build and run app + Postgres in Docker (port 3005)  |
+| `pnpm docker:down`          | Stop the containers                                 |
+| `pnpm docker:logs`          | Follow app logs                                     |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  pages/            public site (Pages Router), one folder per route
+  app/(payload)/    Payload admin + REST API (generated, App Router)
+  cms/              collections, access rules, hooks, seed
+  migrations/       Postgres migrations, applied on startup in production
+  components/       Navbar, Footer, posts/, icons/
+  constants/        post categories (shared by CMS and pages)
+  lib/              data access (posts.ts, server only) and helpers
+  messages/         translations: uk.json, en.json
+  payload.config.ts Payload configuration
+public/             images, grouped by page
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Adding a page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create `src/pages/<route>/index.tsx`.
+2. Export `getStaticProps` (or `getServerSideProps`) that loads `@/messages/${locale}.json` and returns `messages` and `locale`. Copy it from any existing page.
+3. Add a namespace with the same keys to both `src/messages/uk.json` and `src/messages/en.json`.
+4. If it is a top-level section, add it to the `routes` list in `src/components/NavBar`. If the page has a light background, also add it to `blackRoutes`.
 
-## Deploy on Vercel
+### Adding a post category
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Add it to `src/constants/postCategories.ts`, then run `pnpm generate:types` and `pnpm migrate:create add-<category>`. Science categories get their list and post pages automatically at `/science-services/<category>`; add a link to the menu in `src/pages/science-services/index.tsx`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Changing CMS collections
+
+After editing anything in `src/cms/collections`:
+
+1. Restart `pnpm dev`. Payload doesn't hot-reload its config.
+2. Run `pnpm generate:types`.
+3. Run `pnpm migrate:create <name>` and commit the migration. Production applies migrations on startup; dev syncs the schema automatically.
+
+## CMS
+
+- **Posts** have a title, excerpt and content in uk/en, plus a category, optional cover, YouTube link and attachments. Drafts and scheduled publishing are supported. Ukrainian is required; empty English fields fall back to Ukrainian. The publish date is set automatically.
+- **Roles**: the `superadmin` manages users; an `admin` manages content and their own account.
+- **Uploads** go to S3-compatible storage (Cloudflare R2) when the `S3_*` variables are set, under the `S3_PREFIX` folder. Otherwise they are stored in `./media`.
+
+## Deployment
+
+Every push to `master` triggers `.github/workflows/deploy.yml`. The workflow connects to the server over SSH, pulls the code, rebuilds the image and restarts the stack with `docker compose up -d`. The stack is app on port 3005 (proxied by nginx) plus Postgres. Migrations run automatically when the app starts.
+
+Required GitHub secrets: `SERVER_HOST`, `SERVER_USER`, `SERVER_SSH_KEY`, `PROJECT_PATH`.
+
+The server needs a `.env` in `PROJECT_PATH` (see `.env.example`), with a strong `POSTGRES_PASSWORD` and `PAYLOAD_SECRET`, the public `NEXT_PUBLIC_SERVER_URL`, and the `S3_*` credentials. Building the image needs about 2.5 GB RAM.
+
+## Roadmap
+
+- Site-wide search from the header, covering section names, page content and posts.
+- News period navigation and latest news on the landing page.

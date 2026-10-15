@@ -39,7 +39,6 @@
         "description": "The page you are looking for doesn't exist or has been moved.",
         "button": "Back to home"
     },
-
     "UNG": {
         "breadcrumb-1": "Digital Science Services",
         "breadcrumb-2": "Ukrainian National Grid",
@@ -63,7 +62,6 @@
         "partnership-ung": "Ukraine has joined the EGI Council in 2018 as an Associated Participant after a fruitful collaboration going back for many years.",
         "founding": "Ukrainian National Grid was founded as the targeted state scientific and technological project (program) on the development and implementation of grid-technologies adopted by the Cabinet of Ministers of Ukraine in 2009."
     },
-
     "EGI": {
         "breadcrumb-1": "Digital Science Services",
         "breadcrumb-2": "European Grid Infrastructure",
@@ -92,7 +90,6 @@
         "federation-bullet-2-link": "More about the federation",
         "final": "Ukraine has joined the EGI Council in 2018 as an Associated Participant after a fruitful collaboration going back for many years."
     },
-
     "EOSC": {
         "breadcrumb-1": "Digital Science Services",
         "breadcrumb-2": "European Open Science Cloud (EOSC)",
@@ -115,7 +112,6 @@
         "governance-3": "EU countries and countries associated with Horizon 2020 represented through a Steering Board to be set up in 2021 outside of the EOSC Association",
         "final": "Bogolyubov Institute for Theoretical Physics of the National Academy of Sciences of Ukraine officially represents Ukraine in EOSC Association"
     },
-
     "ScienceServices": {
         "title": "Digital Science Services",
         "menu-1": "European Open Science Cloud (EOSC)",
@@ -123,21 +119,10 @@
         "menu-3": "Ukrainian National Grid",
         "menu-4": "Biology",
         "menu-5": "Ecology",
-        "menu-6": "High Energy Physics",
-        "article-1-title": "Numerical Weather Prediction",
-        "article-1-category": "Ecology",
-        "article-1-description": "The Numerical Weather Prediction service for regional weather forecasting allows users to submit calculation requests for a specific region and receive forecasts on Google Maps. The computing service is implemented based on numerical methods and parallel computing models for solving meteorological forecasting problems...",
-        "article-2-title": "Integrated HydroKinetic Model (iHKM)",
-        "article-2-category": "High Energy Physics",
-        "article-2-description": "Introduction Integrated Hydro-Kinetic Model (iHKM) is the powerful tool for simulation of a relativistic heavy ion collision, which allows to describe or predict a wide variety of measured bulk observables. Naturally, a researcher is interested in finding the connection between...",
-        "leave-comment": "Leave a comment"
+        "menu-6": "High Energy Physics"
     },
-
     "News": {
-        "title": "News",
-        "category": "Category",
-        "leaveComment": "Leave a comment",
-        "authorizeToLeaveComment": "To post a comment, you need to be authorised."
+        "title": "News"
     },
     "InnovationCenter": {
         "title": "Digital Innovation Centre",
@@ -242,7 +227,6 @@
         "training-courses": "Training and Courses",
         "lectures": "Lectures and Seminars"
     },
-
     "DigitalTechnologies": {
         "menu-1": "Cloud Technologies",
         "menu-2": "Artificial Intelligence",
@@ -252,7 +236,6 @@
         "breadcrumb": "Digital Innovation Center",
         "title": "Digital Technologies"
     },
-
     "SoftwareArchitecture": {
         "breadcrumb-1": "Digital Innovation Centre",
         "breadcrumb-2": "Digital Technologies",
@@ -279,7 +262,6 @@
         "project-1": "tools have been developed for creating new numerical methods and computational models for studying methodological modelling problems, enabling the improvement of the quality of methodological research",
         "project-2": "program tools for implementing algorithmic computations for general research of natural science problems, provided to the State Service of Ukraine and NASU of Ukraine"
     },
-
     "Blockchain": {
         "breadcrumb-1": "Digital Innovation Centre",
         "breadcrumb-2": "Digital Technologies",
@@ -298,7 +280,6 @@
         "experience-3": "tokenization project Green bonds exchange for trading of tokenized carbon units",
         "experience-4": "crowdinvesting platform Realium.coop for tokenization of startups"
     },
-
     "Cybersecurity": {
         "breadcrumb-1": "Digital Innovation Centre",
         "breadcrumb-2": "Digital Technologies",
@@ -324,7 +305,6 @@
         "experience-project-title": "RESPONSE project",
         "experience-project-description": "RESPONSE is a five-year #HorizonD2020 project that aims to establish a strategic vision for #SmartCities #EnergyTransition. iSolutions is a horizontal cybersecurity partner and develops its solutions to have holistic cybersecurity management in smart cities and positive energy districts."
     },
-
     "ArtificialIntelligence": {
         "breadcrumb-1": "Digital Innovation Centre",
         "breadcrumb-2": "Digital Technologies",
@@ -337,7 +317,6 @@
         "providers-title": "Service provider",
         "provider-name": "NaUKMA NCES"
     },
-
     "CloudTechnologies": {
         "breadcrumb-1": "Digital Innovation Centre",
         "breadcrumb-2": "Digital Technologies",
@@ -385,42 +364,6 @@
         "experience-ongoing": "Ongoing EOSC DIH pilots",
         "experience-linkText3": "here"
     },
-
-    "Fiware": {
-        "eyebrow": "FIWARE iHUB",
-        "title": "FIWARE: Building an ecosystem of a smarter future together",
-        "intro-1": "We live in an era when digitalisation is no longer a choice but a prerequisite for resilience and growth for every system: from a startup to a metropolis or an entire industrial sector. The challenge is not only connecting thousands of devices, but also making data interoperable and keeping control over it.",
-        "intro-2": "The FIWARE platform answers these challenges through an open and sustainable ecosystem built on universal standards for real-time context data management. We are not just offering software components. We are accelerating the development of smarter, more accessible and more effective digital solutions.",
-        "foundation-title": "Our foundation: openness and digital twins",
-        "foundation-1": "At the core of FIWARE is the concept of digital twins: virtual representations of real-world entities such as city streets, industrial facilities or agricultural assets. Through the NGSI-LD standard, different systems can exchange contextual information in a shared language and in real time.",
-        "foundation-2": "FIWARE technologies are open, accessible and available for everyone. They help organisations become truly data-driven, so that decisions are based on verified context instead of assumptions.",
-        "aside-description": "NOSC-UA DIH FIWARE iHub connects local expertise with the global FIWARE ecosystem and practical paths to implementation.",
-        "stat-hubs-label": "iHubs already support communities and businesses across the world",
-        "stat-devs-label": "developers are part of the wider FIWARE community",
-        "stat-region-label": "first FIWARE iHub in Eastern Europe",
-        "section-1-title": "FIWARE iHubs: think globally, act locally",
-        "section-1-p1": "Innovation can feel distant and overly complex. To bring technology closer to people, FIWARE created a network of regional digital transformation centres called FIWARE iHubs. NOSC-UA DIH FIWARE iHub is the first FIWARE iHub in Eastern Europe.",
-        "section-1-p2": "For businesses and municipalities, the hardest part of digital transformation is often the lack of internal expertise and implementation capacity. An iHub is not just a consultation point. It is a practical roadmap and a trusted entry point into the ecosystem.",
-        "section-1-list-title": "Our hub works as a one-stop shop for innovation:",
-        "section-1-list-1": "Education and training for developers, managers and teams working with open technologies.",
-        "section-1-list-2": "Mentoring for startups and SMEs from the idea stage to scaling and international market entry.",
-        "section-1-list-3": "Testing and certification support to verify interoperability with FIWARE standards and prepare solutions for the “Powered by FIWARE” path.",
-        "section-1-list-4": "Community access through connections with global experts, investors and partners.",
-        "section-1-note": "Today, more than 39 iHubs around the world help communities and businesses become competitive in the digital economy.",
-        "section-2-title": "Data spaces: security, trust and sovereignty",
-        "section-2-p1": "Data is one of the most valuable assets of our time, which makes secure data exchange critically important. This is why FIWARE is a key contributor to the development of data spaces: decentralised ecosystems where participants can share information while keeping full control over it.",
-        "section-2-p2": "This approach is based on data sovereignty. You decide who can use your data, when, under which terms and for what value. Together with initiatives such as GAIA-X and IDSA, FIWARE provides the technological building blocks required for this model.",
-        "section-2-list-title": "FIWARE supports data spaces with tools for:",
-        "section-2-list-1": "Identity and trust, so participants always know who they are interacting with.",
-        "section-2-list-2": "Transparency, so data exchanges and transactions can be traced and governed reliably.",
-        "section-2-list-3": "Monetisation, so data can become an economic asset and unlock new collaboration models.",
-        "section-2-p3": "From smart cities to energy and agri-tech, FIWARE helps create value chains where every participant benefits from secure and fair data sharing.",
-        "section-3-title": "Join the digital transformation",
-        "section-3-p1": "FIWARE is more than a technology stack. It is a living ecosystem that brings together thousands of developers, member companies and validated solutions where large organisations, startups and public actors can build together.",
-        "section-3-p2": "Whether you want to implement smart technologies in your city or create a trusted environment for data sharing in your industry, we are here to support the next step.",
-        "cta-title": "Learn more about the ecosystem here:",
-        "cta-link": "Official FIWARE website"
-    },
     "Fiware": {
         "eyebrow": "FIWARE iHUB",
         "title": "FIWARE: Building an ecosystem of a smarter future together",
@@ -455,5 +398,9 @@
         "section-3-p2": "We invite you to become part of this community. Whether you want to implement smart technologies in your city or create a secure space for data exchange in your industry, we are here to support you.",
         "cta-title": "Let us build a smart future together — open, reliable, and fair for all.",
         "cta-link": "Learn more, request a consultation / become part of the FIWARE ecosystem today!"
+    },
+    "Posts": {
+        "empty": "No posts yet.",
+        "attachments": "Attachments"
     }
 }

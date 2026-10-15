@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev)",
+      "Bash(pnpm build)",
+      "Bash(pnpm install)",
+      "Bash(pnpm exec tsc --noEmit)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(pnpm db:up)",
+      "Bash(pnpm generate:types)",
+      "Bash(pnpm generate:importmap)",
+      "Bash(pnpm migrate:create:*)"
+    ]
+  }
+}
