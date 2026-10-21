@@ -46,6 +46,9 @@ export default function InnovationCenter() {
                   {
                     link: 'innovation-center/digital-technologies',
                   },
+                  {
+                    link: 'innovation-center/digital-maturity',
+                  },
                 ].map((item, index) => (
                   <button
                     disabled={!item.link}

@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
     locales: ['en', 'uk'],
     localeDetection: false,
   },
+  // The questionnaire used to live at the top level.
+  redirects: async () => [
+    {
+      source: '/digital-maturity',
+      destination: '/innovation-center/digital-maturity',
+      permanent: true,
+    },
+  ],
   eslint: {
     ignoreDuringBuilds: true,
   },

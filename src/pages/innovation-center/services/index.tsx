@@ -135,7 +135,7 @@ export default function InnovationCenterServices() {
                 <p className='text-lg lg:text-xl mb-6 px-4'>
                   {t('assessment-notice')}{' '}
                   <Link
-                    href='/digital-maturity'
+                    href='/innovation-center/digital-maturity'
                     className='underline font-medium text-blue-primary'
                   >
                     {t('assessment-link')}

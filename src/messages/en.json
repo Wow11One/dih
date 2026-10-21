@@ -153,7 +153,8 @@
         "purpose-2": "development of new products and services based on ‘green’ and digital technologies with the involvement of the innovative potential of scientific institutions of the National Academy of Sciences of Ukraine;",
         "purpose-3": "integration of Ukrainian SMEs and researchers into the European Research Area and the EU Digital Single Market.",
         "description-1": "NOSC-UA DIH was launched in 2021 as a non-profit project coordinated by the Kyiv Academic University (KAU) within the framework of the Targeted Programme of Scientific Research of the National Academy of Sciences of Ukraine (NASU) “Mathematical Modelling in Interdisciplinary Research of Processes and Systems Based on Intelligent Supercomputing, Grid and Cloud Technologies” for 2021–2025.",
-        "description-2": "In January 2024, NOSC-UA DIH signed an agreement together with another Kyiv digital innovation hub “Centre 4.0 Igor Sikorsky Kyiv Polytechnic Institute” (Centre 4.0 KPI DIH) and 12 regional partners to establish the “Kyiv HighTech” DIH, coordinated by the Ukrainian Cluster Alliance. In July, within the Digital Europe Programme call, the “Kyiv HighTech” DIH received international status as a European Digital Innovation Hub (EDIH) from the European Commission."
+        "description-2": "In January 2024, NOSC-UA DIH signed an agreement together with another Kyiv digital innovation hub “Centre 4.0 Igor Sikorsky Kyiv Polytechnic Institute” (Centre 4.0 KPI DIH) and 12 regional partners to establish the “Kyiv HighTech” DIH, coordinated by the Ukrainian Cluster Alliance. In July, within the Digital Europe Programme call, the “Kyiv HighTech” DIH received international status as a European Digital Innovation Hub (EDIH) from the European Commission.",
+        "menu-6": "Digital maturity assessment"
     },
     "InnovationCenterPartners": {
         "title": "Digital Innovation Centre",
@@ -407,6 +408,7 @@
         "attachments": "Attachments"
     },
     "DigitalMaturity": {
+        "breadcrumb": "Digital Innovation Centre",
         "title": "Digital maturity assessment",
         "description": "Digital maturity assessment questionnaire for SMEs (EU methodology). Fill it in to get support from NOSC-UA DIH."
     }

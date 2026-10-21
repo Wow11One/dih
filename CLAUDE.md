@@ -60,7 +60,7 @@ There are no tests. ESLint is not installed, and `next.config.ts` skips linting 
 - **Storage**: S3-compatible (Cloudflare R2) via `@payloadcms/storage-s3` when all `S3_*` vars are set, with keys under `S3_PREFIX`. Otherwise files go to `./media` on disk. Files are served through Payload at `/api/media/file/...`.
 - **Startup**: `src/instrumentation.ts` boots Payload with the server. That applies migrations, seeds an empty install (`src/cms/seed`, only when there are no users and no posts) and starts the job runner.
 
-### Digital maturity questionnaire (`/digital-maturity`)
+### Digital maturity questionnaire (`/innovation-center/digital-maturity`)
 - A public 7-step form (EU/JRC SME digital maturity assessment). The spec is in `docs/digital-maturity-assessment.md`. All question texts and options live in `src/constants/digitalMaturity.ts`.
 - **Stored option values are 1-based indices as strings.** Never reorder or remove options once there are submissions; only append.
 - UI is in `src/components/digital-maturity/`. `state.ts` holds client validation (mirrors the server-side rules in the collection) and `toPayload()`. The form POSTs to `/api/assessments` and keeps a draft in localStorage (`dih-digital-maturity-draft-v1`).

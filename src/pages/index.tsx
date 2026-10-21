@@ -82,7 +82,7 @@ export default function Landing() {
               {t('more-services')}
             </Link>
             <Link
-              href='/digital-maturity'
+              href='/innovation-center/digital-maturity'
               className='cursor-pointer font-raleway text-lg lg:text-xl font-bold text-white bg-blue-secondary py-5 px-9 rounded-2xl'
             >
               {t('assess-maturity')}
