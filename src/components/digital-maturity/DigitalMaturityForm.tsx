@@ -172,7 +172,7 @@ export default function DigitalMaturityForm() {
   const stepQuestions = QUESTIONS.filter(q => q.step === step);
 
   return (
-    <div ref={rootRef} className='mx-auto flex w-full max-w-[1120px] flex-col gap-6'>
+    <div ref={rootRef} className='flex w-full flex-col gap-6'>
       <h1 className='font-raleway text-xl font-bold leading-[1.3] text-blue-primary text-balance lg:text-2xl'>
         Анкета для оцінювання цифрової зрілості МСП
       </h1>
