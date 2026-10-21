@@ -18,7 +18,8 @@
         "industries-3": "Digital and green transition",
         "industries-4": "Digital technologies centre for non-destructive testing",
         "industries-5": "New materials",
-        "partners-description": "The infrastructure base for the Virtual Centre for Digital Science is the cloud cluster of the Ukrainian National Grid and the educational-research platform of the KAU Data Science Research Center. The implementation of the main project tasks focuses on the development of the UNG cloud grid infrastructure."
+        "partners-description": "The infrastructure base for the Virtual Centre for Digital Science is the cloud cluster of the Ukrainian National Grid and the educational-research platform of the KAU Data Science Research Center. The implementation of the main project tasks focuses on the development of the UNG cloud grid infrastructure.",
+        "assess-maturity": "Assess digital maturity"
     },
     "Navbar": {
         "main": "Home",
@@ -217,7 +218,9 @@
         "service-14-title": "Assessment and Development of Organizational Digital Maturity",
         "service-14-description": "• Diagnosis of the current level of digital maturity (assessment of processes, technologies, data, staff competencies and management practices using a defined maturity model)\n\n• Identification of digital gaps and development priorities (identifying weaknesses and areas of greatest impact of digital initiatives on business outcomes)\n\n• Roadmap development (creating a phased digital transformation plan with specific initiatives, timelines, responsibilities and expected outcomes)\n\n• Development of digital competencies and management approaches (team training, updating management processes and data-driven decision-making culture)\n\n• Progress monitoring and re-assessment (regular measurement of changes, plan adjustments and support for continuous improvement of organizational digital maturity)",
         "service-15-title": "Energy Storage and Accumulation Systems at Microgrid Level (up to 1 MWh)",
-        "service-15-description": "• Energy audit\n\n• Data processing and analysis, digital twin development\n\n• Design and installation of power supply systems based on needs analysis (for enterprise own consumption, for market balancing, for surplus energy sales)\n\n• Construction and installation of engineering infrastructure facilities\n\n• Solar power plant construction"
+        "service-15-description": "• Energy audit\n\n• Data processing and analysis, digital twin development\n\n• Design and installation of power supply systems based on needs analysis (for enterprise own consumption, for market balancing, for surplus energy sales)\n\n• Construction and installation of engineering infrastructure facilities\n\n• Solar power plant construction",
+        "assessment-notice": "Assess the digital maturity of your company —",
+        "assessment-link": "fill in the questionnaire (in Ukrainian)"
     },
     "InnovationCenterTraining": {
         "breadcrumb": "Digital Innovation Centre",
@@ -402,5 +405,9 @@
     "Posts": {
         "empty": "No posts yet.",
         "attachments": "Attachments"
+    },
+    "DigitalMaturity": {
+        "title": "Digital maturity assessment",
+        "description": "Digital maturity assessment questionnaire for SMEs (EU methodology). Fill it in to get support from NOSC-UA DIH."
     }
 }

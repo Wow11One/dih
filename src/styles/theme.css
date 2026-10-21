@@ -6,6 +6,20 @@
 
   --color-blue-primary: #0A2752;
   --color-blue-secondary: #52BCC3;
+  --color-blue-secondary-hover: #46A9B0;
+
+  /* Form palette (digital maturity questionnaire). */
+  --color-form-line: #D5E8EC;
+  --color-form-track: #E6EFF2;
+  --color-form-soft: #F4FAFB;
+  --color-form-selected: #EEF8F9;
+  --color-form-input: #8A9BA8;
+  --color-form-muted: #4B5563;
+  --color-form-placeholder: #6B7C88;
+  --color-form-error: #C62828;
+  --color-form-error-bg: #FDECEC;
+  --color-form-error-line: #F3C4C4;
+  --color-form-error-text: #8E1B1B;
 
   --breakpoint-sm: 640.1px;
   --breakpoint-md: 768.1px;

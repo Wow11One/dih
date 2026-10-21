@@ -69,7 +69,10 @@ export interface Config {
   collections: {
     posts: Post;
     media: Media;
+    assessments: Assessment;
     users: User;
+    exports: Export;
+    imports: Import;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -80,7 +83,10 @@ export interface Config {
   collectionsSelect: {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    assessments: AssessmentsSelect<false> | AssessmentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    exports: ExportsSelect<false> | ExportsSelect<true>;
+    imports: ImportsSelect<false> | ImportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -100,6 +106,8 @@ export interface Config {
   user: User;
   jobs: {
     tasks: {
+      createCollectionExport: TaskCreateCollectionExport;
+      createCollectionImport: TaskCreateCollectionImport;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -227,6 +235,120 @@ export interface Media {
   };
 }
 /**
+ * Digital maturity assessments submitted from the website form.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "assessments".
+ */
+export interface Assessment {
+  id: number;
+  /**
+   * Заповнює команда DIH.
+   */
+  participantId?: string | null;
+  note?: string | null;
+  companyName: string;
+  taxId?: string | null;
+  contactPerson?: string | null;
+  position?: string | null;
+  email: string;
+  phone?: string | null;
+  website?: string | null;
+  staffSize: '1' | '2' | '3' | '4';
+  foundedYear: number;
+  country: string;
+  region?: string | null;
+  postalCode?: string | null;
+  address?: string | null;
+  mainIndustry:
+    | '1'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
+    | '16'
+    | '17'
+    | '18'
+    | '19'
+    | '20'
+    | '21'
+    | '22';
+  otherIndustries?:
+    | (
+        | '1'
+        | '2'
+        | '3'
+        | '4'
+        | '5'
+        | '6'
+        | '7'
+        | '8'
+        | '9'
+        | '10'
+        | '11'
+        | '12'
+        | '13'
+        | '14'
+        | '15'
+        | '16'
+        | '17'
+        | '18'
+        | '19'
+        | '20'
+        | '21'
+        | '22'
+        | 'other'
+        | 'none'
+      )[]
+    | null;
+  otherIndustryText?: string | null;
+  q1Invested?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[] | null;
+  q1Planned?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[] | null;
+  q2?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[] | null;
+  q3?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[] | null;
+  q4: {
+    r1: number;
+    r2: number;
+    r3: number;
+    r4: number;
+    r5: number;
+    r6: number;
+    r7: number;
+  };
+  q5?: ('1' | '2' | '3' | '4' | '5' | '6' | '7')[] | null;
+  q6?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8')[] | null;
+  q7?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8')[] | null;
+  q8?: ('1' | '2' | '3' | '4' | '5' | '6')[] | null;
+  q9: {
+    r1: number;
+    r2: number;
+    r3: number;
+    r4: number;
+    r5: number;
+  };
+  q10?: ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10')[] | null;
+  q11: {
+    r1: 'no' | 'partial' | 'yes';
+    r2: 'no' | 'partial' | 'yes';
+    r3: 'no' | 'partial' | 'yes';
+    r4: 'no' | 'partial' | 'yes';
+    r5: 'no' | 'partial' | 'yes';
+  };
+  consent: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -253,6 +375,81 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exports".
+ */
+export interface Export {
+  id: number;
+  name?: string | null;
+  format: 'csv' | 'json';
+  limit?: number | null;
+  page?: number | null;
+  sort?: string | null;
+  sortOrder?: ('asc' | 'desc') | null;
+  locale?: ('all' | 'uk' | 'en') | null;
+  drafts?: ('yes' | 'no') | null;
+  selectionToUse?: ('currentSelection' | 'currentFilters' | 'all') | null;
+  fields?: string[] | null;
+  collectionSlug: string;
+  where?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "imports".
+ */
+export interface Import {
+  id: number;
+  collectionSlug: string;
+  importMode?: ('create' | 'update' | 'upsert') | null;
+  matchField?: string | null;
+  status?: ('pending' | 'completed' | 'partial' | 'failed') | null;
+  summary?: {
+    imported?: number | null;
+    updated?: number | null;
+    total?: number | null;
+    issues?: number | null;
+    issueDetails?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -323,7 +520,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'schedulePublish';
+        taskSlug: 'inline' | 'createCollectionExport' | 'createCollectionImport' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -356,7 +553,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'createCollectionExport' | 'createCollectionImport' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -377,6 +574,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'assessments';
+        value: number | Assessment;
       } | null)
     | ({
         relationTo: 'users';
@@ -499,6 +700,71 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "assessments_select".
+ */
+export interface AssessmentsSelect<T extends boolean = true> {
+  participantId?: T;
+  note?: T;
+  companyName?: T;
+  taxId?: T;
+  contactPerson?: T;
+  position?: T;
+  email?: T;
+  phone?: T;
+  website?: T;
+  staffSize?: T;
+  foundedYear?: T;
+  country?: T;
+  region?: T;
+  postalCode?: T;
+  address?: T;
+  mainIndustry?: T;
+  otherIndustries?: T;
+  otherIndustryText?: T;
+  q1Invested?: T;
+  q1Planned?: T;
+  q2?: T;
+  q3?: T;
+  q4?:
+    | T
+    | {
+        r1?: T;
+        r2?: T;
+        r3?: T;
+        r4?: T;
+        r5?: T;
+        r6?: T;
+        r7?: T;
+      };
+  q5?: T;
+  q6?: T;
+  q7?: T;
+  q8?: T;
+  q9?:
+    | T
+    | {
+        r1?: T;
+        r2?: T;
+        r3?: T;
+        r4?: T;
+        r5?: T;
+      };
+  q10?: T;
+  q11?:
+    | T
+    | {
+        r1?: T;
+        r2?: T;
+        r3?: T;
+        r4?: T;
+        r5?: T;
+      };
+  consent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -521,6 +787,65 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exports_select".
+ */
+export interface ExportsSelect<T extends boolean = true> {
+  name?: T;
+  format?: T;
+  limit?: T;
+  page?: T;
+  sort?: T;
+  sortOrder?: T;
+  locale?: T;
+  drafts?: T;
+  selectionToUse?: T;
+  fields?: T;
+  collectionSlug?: T;
+  where?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "imports_select".
+ */
+export interface ImportsSelect<T extends boolean = true> {
+  collectionSlug?: T;
+  importMode?: T;
+  matchField?: T;
+  status?: T;
+  summary?:
+    | T
+    | {
+        imported?: T;
+        updated?: T;
+        total?: T;
+        issues?: T;
+        issueDetails?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -602,6 +927,56 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskCreateCollectionExport".
+ */
+export interface TaskCreateCollectionExport {
+  input: {
+    id: string;
+    name: string;
+    batchSize?: number | null;
+    collectionSlug: 'posts' | 'media' | 'assessments' | 'users' | 'exports' | 'imports';
+    drafts?: ('yes' | 'no') | null;
+    exportCollection: string;
+    fields?: string[] | null;
+    format: 'csv' | 'json';
+    limit?: number | null;
+    locale?: string | null;
+    maxLimit?: number | null;
+    page?: number | null;
+    sort?: string | null;
+    userCollection?: string | null;
+    userID?: string | null;
+    where?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskCreateCollectionImport".
+ */
+export interface TaskCreateCollectionImport {
+  input: {
+    importId: string;
+    importCollection: string;
+    userID?: string | null;
+    userCollection?: string | null;
+    batchSize?: number | null;
+    debug?: boolean | null;
+    defaultVersionStatus?: ('draft' | 'published') | null;
+    maxLimit?: number | null;
+  };
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

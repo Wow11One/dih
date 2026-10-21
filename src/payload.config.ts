@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
+import { importExportPlugin } from '@payloadcms/plugin-import-export';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { en } from '@payloadcms/translations/languages/en';
@@ -8,10 +9,12 @@ import { buildConfig, type SharpDependency } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
 
+import { Assessments } from './cms/collections/Assessments';
 import { Media } from './cms/collections/Media';
 import { Posts } from './cms/collections/Posts';
 import { Users } from './cms/collections/Users';
 import { seedIfEmpty } from './cms/seed';
+import { assessmentsBeforeExport } from './cms/utils/assessmentCsv';
 import { migrations } from './migrations';
 
 const filename = fileURLToPath(import.meta.url);
@@ -56,7 +59,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     meta: { titleSuffix: ' — DIH' },
   },
-  collections: [Posts, Media, Users],
+  collections: [Posts, Media, Assessments, Users],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) =>
       defaultFeatures.filter(
@@ -90,6 +93,23 @@ export default buildConfig({
     autoRun: [{ cron: '* * * * *', queue: 'default', limit: 10 }],
   },
   plugins: [
+    // CSV export of assessments from the admin list ("⋮" → Export).
+    // Download only: exports aren't stored, to avoid piling up copies of
+    // personal data. Import is disabled: assessments come only from the form.
+    importExportPlugin({
+      collections: [
+        {
+          slug: 'assessments',
+          import: false,
+          export: {
+            format: 'csv',
+            disableSave: true,
+            disableJobsQueue: true,
+            hooks: { before: assessmentsBeforeExport },
+          },
+        },
+      ],
+    }),
     s3Storage({
       enabled: s3Enabled,
       collections: {

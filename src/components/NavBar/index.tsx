@@ -112,6 +112,7 @@ const Navbar: FC<NavbarProps> = () => {
       { link: '/innovation-center', exact: true },
       { link: '/innovation-center/training', exact: true },
       { link: '/fiware', exact: false },
+      { link: '/digital-maturity', exact: false },
     ];
 
     const shouldBeBlack = blackRoutes.some(item =>

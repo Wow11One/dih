@@ -60,6 +60,15 @@ There are no tests. ESLint is not installed, and `next.config.ts` skips linting 
 - **Storage**: S3-compatible (Cloudflare R2) via `@payloadcms/storage-s3` when all `S3_*` vars are set, with keys under `S3_PREFIX`. Otherwise files go to `./media` on disk. Files are served through Payload at `/api/media/file/...`.
 - **Startup**: `src/instrumentation.ts` boots Payload with the server. That applies migrations, seeds an empty install (`src/cms/seed`, only when there are no users and no posts) and starts the job runner.
 
+### Digital maturity questionnaire (`/digital-maturity`)
+- A public 7-step form (EU/JRC SME digital maturity assessment). The spec is in `docs/digital-maturity-assessment.md`. All question texts and options live in `src/constants/digitalMaturity.ts`.
+- **Stored option values are 1-based indices as strings.** Never reorder or remove options once there are submissions; only append.
+- UI is in `src/components/digital-maturity/`. `state.ts` holds client validation (mirrors the server-side rules in the collection) and `toPayload()`. The form POSTs to `/api/assessments` and keeps a draft in localStorage (`dih-digital-maturity-draft-v1`).
+- **`Assessments` collection** (`src/cms/collections/Assessments.ts`):
+  - only anonymous requests can create (admins can't), with a honeypot field `hp` and an in-memory IP rate limit (`src/cms/utils/rateLimit.ts`, 5 per 10 minutes, keyed by `X-Real-IP`);
+  - answers are read-only after creation; only `participantId` (ІНУ) and `note` are editable.
+- **CSV export** uses `@payloadcms/plugin-import-export` (admin list "⋮" → Export, download only, import disabled). `src/cms/utils/assessmentCsv.ts` rebuilds each row with Ukrainian headers, labels instead of codes, and Kyiv-time dates.
+
 ## Deployment
 
 `docker-compose.yml` runs `app` (container `dih`, port 3005) and `db` (Postgres 17, volume `pgdata`, published only on `127.0.0.1:5434`). The deploy workflow writes `.env` on the server from GitHub secrets. Inside compose, `DATABASE_URL` is overridden to point at the `db` host. `NEXT_PUBLIC_SERVER_URL` is a build arg, because it is inlined at build time.

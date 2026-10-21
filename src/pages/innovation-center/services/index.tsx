@@ -2,6 +2,7 @@ import ReactIcon from '@/components/icons/React';
 import { GetStaticProps } from 'next';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -129,6 +130,16 @@ export default function InnovationCenterServices() {
                   >
                     {t('form-notice-link')}
                   </a>
+                  .
+                </p>
+                <p className='text-lg lg:text-xl mb-6 px-4'>
+                  {t('assessment-notice')}{' '}
+                  <Link
+                    href='/digital-maturity'
+                    className='underline font-medium text-blue-primary'
+                  >
+                    {t('assessment-link')}
+                  </Link>
                   .
                 </p>
                 <div className=''>
