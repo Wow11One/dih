@@ -11,6 +11,22 @@ const nextConfig: NextConfig = {
   },
   // The questionnaire used to live at the top level.
   redirects: async () => [
+    // One canonical host: the admin talks to NEXT_PUBLIC_SERVER_URL (no www),
+    // so an admin opened on www breaks with CORS / lost session.
+    // English pages first (`locale: false` keeps the /en prefix), then the rest.
+    ...['/en', '/en/:path*'].map(source => ({
+      source,
+      has: [{ type: 'host' as const, value: 'www.noscuadih.org' }],
+      destination: `https://noscuadih.org${source}`,
+      permanent: true,
+      locale: false as const,
+    })),
+    {
+      source: '/:path*',
+      has: [{ type: 'host', value: 'www.noscuadih.org' }],
+      destination: 'https://noscuadih.org/:path*',
+      permanent: true,
+    },
     {
       source: '/digital-maturity',
       destination: '/innovation-center/digital-maturity',
