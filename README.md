@@ -75,7 +75,7 @@ After editing anything in `src/cms/collections`:
 
 ## Deployment
 
-Every push to `master` triggers `.github/workflows/deploy.yml`. The workflow connects to the server over SSH, pulls the code, rebuilds the image and restarts the stack with `docker compose up -d`. The stack is app on port 3005 (proxied by nginx) plus Postgres. Migrations run automatically when the app starts.
+Every push to `master` triggers `.github/workflows/deploy.yml` (it can also be run by hand from the Actions tab). The workflow builds the Docker image on GitHub's runner and pushes it to GHCR, because the server doesn't have enough RAM to build it. Then it connects to the server over SSH, pulls the image and restarts the stack with `docker compose up -d`. The stack is app on port 3005 (proxied by nginx) plus Postgres. Migrations run automatically when the app starts.
 
 GitHub secrets:
 
@@ -83,7 +83,7 @@ GitHub secrets:
 - `POSTGRES_PASSWORD`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL`: required. The workflow stops before touching the server if any of them is missing.
 - `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`: R2 storage. Without them, uploads are stored in a docker volume.
 
-The workflow generates `.env` on the server from these secrets on every deploy. Never change `POSTGRES_PASSWORD` or `PAYLOAD_SECRET` after the first deploy: the database volume is initialized with that password, and the secret signs admin sessions. If the image build fails, the old container keeps running. Building the image needs about 2.5 GB RAM.
+The workflow generates `.env` on the server from these secrets on every deploy. Never change `POSTGRES_PASSWORD` or `PAYLOAD_SECRET` after the first deploy: the database volume is initialized with that password, and the secret signs admin sessions. If the build or the image pull fails, the old container keeps running.
 
 ## Roadmap
 

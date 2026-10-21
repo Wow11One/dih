@@ -1,5 +1,8 @@
 services:
   app:
+    # On the server this is the image built by GitHub Actions (set in .env);
+    # locally `docker compose up --build` builds it from the Dockerfile.
+    image: ${DIH_IMAGE:-dih-app}
     build:
       context: .
       args:
