@@ -24,6 +24,21 @@ const s3Enabled = Boolean(
     process.env.S3_SECRET_ACCESS_KEY,
 );
 
+// serverURL is also the CSRF allowlist (requests from other origins lose
+// their admin session). In dev it stays empty so any port works; in
+// production the www/non-www twin of the domain is allowed too.
+const serverURL =
+  process.env.NODE_ENV === 'production'
+    ? process.env.NEXT_PUBLIC_SERVER_URL || ''
+    : '';
+
+const withWwwTwin = (url: string) => {
+  if (!url) return [];
+  const { protocol, host } = new URL(url);
+  const twin = host.startsWith('www.') ? host.slice(4) : `www.${host}`;
+  return [url, `${protocol}//${twin}`];
+};
+
 const DISABLED_EDITOR_FEATURES = [
   'relationship',
   'checklist',
@@ -33,13 +48,8 @@ const DISABLED_EDITOR_FEATURES = [
 ];
 
 export default buildConfig({
-  // serverURL also becomes the CSRF allowlist, so in dev it stays empty:
-  // otherwise the admin breaks when `pnpm dev` lands on a port other than
-  // the one in NEXT_PUBLIC_SERVER_URL.
-  serverURL:
-    process.env.NODE_ENV === 'production'
-      ? process.env.NEXT_PUBLIC_SERVER_URL || ''
-      : '',
+  serverURL,
+  csrf: withWwwTwin(serverURL),
   secret: process.env.PAYLOAD_SECRET || '',
   admin: {
     user: Users.slug,
