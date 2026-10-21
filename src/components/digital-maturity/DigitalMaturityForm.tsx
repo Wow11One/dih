@@ -178,9 +178,9 @@ export default function DigitalMaturityForm() {
       </h1>
 
       {restored && !done && (
-        <div className='flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-form-line bg-form-soft px-[18px] py-3 text-base leading-normal'>
-          <span>Ми відновили ваші відповіді.</span>
-          <div className='flex items-center gap-2'>
+        <div className='flex items-center justify-between gap-4 rounded-2xl border border-form-line bg-form-soft py-2 pl-[18px] pr-2 text-base leading-normal'>
+          <div className='flex flex-wrap items-center gap-x-4'>
+            <span>Ми відновили ваші відповіді.</span>
             <button
               type='button'
               onClick={restart}
@@ -188,24 +188,24 @@ export default function DigitalMaturityForm() {
             >
               Почати заново
             </button>
-            {/* Hides the banner only; the restored answers stay. */}
-            <button
-              type='button'
-              aria-label='Закрити'
-              title='Закрити'
-              onClick={() => setRestored(false)}
-              className='flex size-10 cursor-pointer items-center justify-center rounded-lg text-blue-primary hover:bg-form-selected'
-            >
-              <svg width='20' height='20' viewBox='0 0 24 24' fill='none' aria-hidden>
-                <path
-                  d='M6 6l12 12M18 6L6 18'
-                  stroke='currentColor'
-                  strokeWidth='2.2'
-                  strokeLinecap='round'
-                />
-              </svg>
-            </button>
           </div>
+          {/* Hides the banner only; the restored answers stay. */}
+          <button
+            type='button'
+            aria-label='Закрити'
+            title='Закрити'
+            onClick={() => setRestored(false)}
+            className='flex size-10 flex-none cursor-pointer items-center justify-center rounded-lg text-blue-primary hover:bg-form-selected'
+          >
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' aria-hidden>
+              <path
+                d='M6 6l12 12M18 6L6 18'
+                stroke='currentColor'
+                strokeWidth='2.2'
+                strokeLinecap='round'
+              />
+            </svg>
+          </button>
         </div>
       )}
 
