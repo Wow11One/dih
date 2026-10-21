@@ -179,7 +179,7 @@ export default function DigitalMaturityForm() {
 
       {restored && !done && (
         <div className='flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-form-line bg-form-soft px-[18px] py-3 text-base leading-normal'>
-          <span>Ми відновили ваші відповіді.</span>
+          <span>Ми відновили ваші відповіді після перезавантаження сторінки.</span>
           <button
             type='button'
             onClick={restart}
