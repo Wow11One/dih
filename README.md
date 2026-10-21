@@ -77,9 +77,13 @@ After editing anything in `src/cms/collections`:
 
 Every push to `master` triggers `.github/workflows/deploy.yml`. The workflow connects to the server over SSH, pulls the code, rebuilds the image and restarts the stack with `docker compose up -d`. The stack is app on port 3005 (proxied by nginx) plus Postgres. Migrations run automatically when the app starts.
 
-Required GitHub secrets: `SERVER_HOST`, `SERVER_USER`, `SERVER_SSH_KEY`, `PROJECT_PATH`.
+GitHub secrets:
 
-The server needs a `.env` in `PROJECT_PATH` (see `.env.example`), with a strong `POSTGRES_PASSWORD` and `PAYLOAD_SECRET`, the public `NEXT_PUBLIC_SERVER_URL`, and the `S3_*` credentials. Building the image needs about 2.5 GB RAM.
+- `SERVER_HOST`, `SERVER_USER`, `SERVER_SSH_KEY`, `PROJECT_PATH`: SSH access.
+- `POSTGRES_PASSWORD`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL`: required. The workflow stops before touching the server if any of them is missing.
+- `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`: R2 storage. Without them, uploads are stored in a docker volume.
+
+The workflow generates `.env` on the server from these secrets on every deploy. Never change `POSTGRES_PASSWORD` or `PAYLOAD_SECRET` after the first deploy: the database volume is initialized with that password, and the secret signs admin sessions. If the image build fails, the old container keeps running. Building the image needs about 2.5 GB RAM.
 
 ## Roadmap
 

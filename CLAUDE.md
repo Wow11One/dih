@@ -62,6 +62,6 @@ There are no tests. ESLint is not installed, and `next.config.ts` skips linting 
 
 ## Deployment
 
-`docker-compose.yml` runs `app` (container `dih`, port 3005) and `db` (Postgres 17, volume `pgdata`, published only on `127.0.0.1:5434`). The server needs a `.env` next to the compose file. Inside compose, `DATABASE_URL` is overridden to point at the `db` host. `NEXT_PUBLIC_SERVER_URL` is a build arg, because it is inlined at build time.
+`docker-compose.yml` runs `app` (container `dih`, port 3005) and `db` (Postgres 17, volume `pgdata`, published only on `127.0.0.1:5434`). The deploy workflow writes `.env` on the server from GitHub secrets. Inside compose, `DATABASE_URL` is overridden to point at the `db` host. `NEXT_PUBLIC_SERVER_URL` is a build arg, because it is inlined at build time.
 
 On push to `master`, `.github/workflows/deploy.yml` SSHes to the server and runs `git pull`, `docker compose build app`, then `docker compose up -d`. A production build needs about 2.5 GB RAM; at runtime the app uses about 300 MB and Postgres about 50 MB. The `nginx` file is a reference config for the shared server.
