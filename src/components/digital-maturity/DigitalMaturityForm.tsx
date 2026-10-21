@@ -179,14 +179,33 @@ export default function DigitalMaturityForm() {
 
       {restored && !done && (
         <div className='flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-form-line bg-form-soft px-[18px] py-3 text-base leading-normal'>
-          <span>Ми відновили ваші відповіді після перезавантаження сторінки.</span>
-          <button
-            type='button'
-            onClick={restart}
-            className='cursor-pointer py-2.5 text-base font-semibold text-blue-primary underline underline-offset-2'
-          >
-            Почати заново
-          </button>
+          <span>Ми відновили ваші відповіді.</span>
+          <div className='flex items-center gap-2'>
+            <button
+              type='button'
+              onClick={restart}
+              className='cursor-pointer py-2.5 text-base font-semibold text-blue-primary underline underline-offset-2'
+            >
+              Почати заново
+            </button>
+            {/* Hides the banner only; the restored answers stay. */}
+            <button
+              type='button'
+              aria-label='Закрити'
+              title='Закрити'
+              onClick={() => setRestored(false)}
+              className='flex size-10 cursor-pointer items-center justify-center rounded-lg text-blue-primary hover:bg-form-selected'
+            >
+              <svg width='20' height='20' viewBox='0 0 24 24' fill='none' aria-hidden>
+                <path
+                  d='M6 6l12 12M18 6L6 18'
+                  stroke='currentColor'
+                  strokeWidth='2.2'
+                  strokeLinecap='round'
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
 
