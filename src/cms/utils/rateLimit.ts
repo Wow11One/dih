@@ -12,12 +12,15 @@ const hits = new Map<string, number[]>();
 const clientIp = (req: PayloadRequest) =>
   req.headers.get('x-real-ip') ||
   req.headers.get('x-forwarded-for')?.split(',').pop()?.trim() ||
-  'unknown';
+  null;
 
 /** Returns false once an IP made more than MAX_PER_WINDOW requests. */
 export const checkRateLimit = (req: PayloadRequest) => {
   const now = Date.now();
   const ip = clientIp(req);
+  // Without a client IP (proxy not forwarding it) every visitor would share
+  // one bucket and block each other, so don't limit at all.
+  if (!ip) return true;
   const recent = (hits.get(ip) ?? []).filter(t => now - t < WINDOW_MS);
   if (recent.length >= MAX_PER_WINDOW) {
     hits.set(ip, recent);
