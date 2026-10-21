@@ -5,7 +5,7 @@ import { s3Storage } from '@payloadcms/storage-s3';
 import { en } from '@payloadcms/translations/languages/en';
 import { uk } from '@payloadcms/translations/languages/uk';
 import path from 'path';
-import { buildConfig, type SharpDependency } from 'payload';
+import { buildConfig, type Field, type SharpDependency } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
 
@@ -41,6 +41,19 @@ const withWwwTwin = (url: string) => {
   const twin = host.startsWith('www.') ? host.slice(4) : `www.${host}`;
   return [url, `${protocol}//${twin}`];
 };
+
+// Recursively sets admin.hidden on the named field (it sits inside a
+// collapsible in the plugin's export collection).
+const hideField = (fields: Field[], name: string): Field[] =>
+  fields.map(field => {
+    if ('name' in field && field.name === name) {
+      return { ...field, admin: { ...field.admin, hidden: true } } as Field;
+    }
+    if ('fields' in field && Array.isArray(field.fields)) {
+      return { ...field, fields: hideField(field.fields, name) } as Field;
+    }
+    return field;
+  });
 
 const DISABLED_EDITOR_FEATURES = [
   'relationship',
@@ -106,6 +119,13 @@ export default buildConfig({
             disableSave: true,
             disableJobsQueue: true,
             hooks: { before: assessmentsBeforeExport },
+            // The CSV always has every column (built in assessmentsBeforeExport),
+            // so hide the field picker: it pre-fills from the list columns and
+            // would otherwise leave most of the CSV empty.
+            overrideCollection: ({ collection }) => ({
+              ...collection,
+              fields: hideField(collection.fields, 'fields'),
+            }),
           },
         },
       ],
