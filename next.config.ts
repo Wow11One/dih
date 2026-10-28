@@ -21,10 +21,19 @@ const nextConfig: NextConfig = {
       permanent: true,
       locale: false as const,
     })),
+    // /api is not redirected: a page still open on www (opened before the
+    // redirect, or with a draft in its localStorage) must be able to submit.
+    // A cross-origin redirect would turn the POST into a blocked CORS request.
     {
-      source: '/:path*',
+      source: '/',
       has: [{ type: 'host', value: 'www.noscuadih.org' }],
-      destination: 'https://noscuadih.org/:path*',
+      destination: 'https://noscuadih.org/',
+      permanent: true,
+    },
+    {
+      source: '/:path((?!api(?:/|$)).*)',
+      has: [{ type: 'host', value: 'www.noscuadih.org' }],
+      destination: 'https://noscuadih.org/:path',
       permanent: true,
     },
     {
